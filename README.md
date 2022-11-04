@@ -1,27 +1,50 @@
-# NlwCopa
+<h1 align="center"> NLW Copa </h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2.
+<p align="center">
+Evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologias WEB.
+</p>
 
-## Development server
+<p align="center">
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">Licença</a>
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<p align="center">
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=49AA26&labelColor=000000">
+</p>
 
-## Code scaffolding
+<br>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<p align="center">
+  <img alt="nlw copa" src=".github/nlw-copa.png" width="100%">
+</p>
 
-## Build
+## 🚀 Tecnologias
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-## Running unit tests
+- Angular - Front
+- Tailwind - CSS
+- Fastify - Back
+- Prisma
+- SQLite - Banco de dados
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 💻 Projeto
 
-## Running end-to-end tests
+O Nlw Copa é uma aplicação web e mobile com o objetivo de criar bolões de apostas para você se divertir com os amigos durante a copa do mundo que está vindo por ai.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Projeto paralizado, preciso aprender ionic para a parte mobile.
 
-## Further help
+## 🔖 Layout
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/file/pgWxlBr4x2U9mlnyCGWapK/Bolão-da-Copa-(Community)?node-id=0%3A1). É necessário ter conta no [Figma](https://figma.com) para acessá-lo.
+
+## :memo: Licença
+
+Esse projeto está sob a licença MIT.
+
+---
+
+Feito com ♥ by Rocketseat :wave: [Participe da nossa comunidade!](https://discord.gg/rocketseat)
