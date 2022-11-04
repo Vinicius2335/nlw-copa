@@ -29,25 +29,28 @@ async function bootstrap() {
     origin: true,
   })
 
-  // 1 endpoint
+  // 1 endpoint/ retorna o numero de boloes
   fastify.get('/pools/count', async () => {
     const count = await prisma.pool.count();
 
     return { count };
   });
 
+  // retorna o numero de usuários
   fastify.get('/users/count', async () => {
     const count = await prisma.user.count();
 
     return { count };
   });
 
+  // retorna o numero de palpites
   fastify.get('/guesses/count', async () => {
     const count = await prisma.guess.count();
 
     return { count };
   });
 
+  // cria um novo bolao
   fastify.post('/pools', async (req, res) => {
     const createPoolBody = z.object({
       title: z.string(),
@@ -65,7 +68,7 @@ async function bootstrap() {
       }
     })
 
-    res.status(201).send({ title });
+    res.status(201).send({ title, code });
   });
 
   await fastify.listen({ port: 3333, host: '0.0.0.0' });
