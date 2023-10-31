@@ -1,5 +1,4 @@
-import { Center, StyledProvider, Text } from "@gluestack-ui/themed"
-import { config } from "../styles/gluestack-ui.config"
+import { Center, Text } from "@gluestack-ui/themed"
 
 export default function Signin() {
   return (

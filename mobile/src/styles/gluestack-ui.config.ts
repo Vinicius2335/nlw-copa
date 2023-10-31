@@ -16,12 +16,7 @@ export const config = {
       green500: "#047C3F",
       yellow500: "#F7DD43",
       yellow600: "#BBA317",
-      red500: "#DB4437"
-    },
-    fonts:{
-      heading: 'Roboto_700Bold',
-      body: 'Roboto_400Regular',
-      medium: 'Roboto_500Medium'
+      red500: "#DB4437",
     },
     fontSize: {
       ...defaultConfig.tokens.fontSizes,

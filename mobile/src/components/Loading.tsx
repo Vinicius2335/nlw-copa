@@ -1,5 +1,4 @@
-import { Center, Spinner, StyledProvider } from "@gluestack-ui/themed"
-import { config } from "../styles/gluestack-ui.config"
+import { Center, Spinner } from "@gluestack-ui/themed"
 
 export default function Loading() {
   return (

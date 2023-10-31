@@ -3,25 +3,21 @@ import { GluestackUIProvider, StatusBar } from "@gluestack-ui/themed"
 import { config } from "./src/styles/gluestack-ui.config"
 
 import {
+  useFonts,
   Roboto_400Regular,
   Roboto_500Medium,
   Roboto_700Bold,
-  useFonts
 } from "@expo-google-fonts/roboto"
 import Loading from "./src/components/Loading"
 import Signin from "./src/screens/Signin"
 
 export default function App() {
-  const [hasLoadedFonts] = useFonts({ Roboto_400Regular, Roboto_500Medium, Roboto_700Bold })
-
-  if (!hasLoadedFonts) {
-    return null;
-  }
+  //  let [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_500Medium, Roboto_700Bold });
 
   return (
     <GluestackUIProvider config={config}>
-      <StatusBar barStyle="light-content" backgroundColor={"transparent"} translucent /> // BUG
-      {/* {hasLoadedFonts ? <Loading /> : <Signin />} */}
+      <StatusBar barStyle="light-content" backgroundColor={"$transparent"} translucent />
+      {/* {fontsLoaded ? <Loading /> : <Signin />} */}
       <Signin />
     </GluestackUIProvider>
   )
