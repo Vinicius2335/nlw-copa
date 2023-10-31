@@ -8,10 +8,29 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: 'var(--font-roboto), sans-serif'
+      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        app: 'url(/app-bg.png)'
+      },
+      colors: {
+        ignite: {
+          500: "#129E57",
+        },
+
+        nlwYellow: {
+          500: "#F7DD43",
+          700: "#E5CD3D"
+        },
+
+        nlwGray: {
+          100: "#E1E1E6",
+          600: "#323238",
+          800: "#202024",
+          900: "#121214"
+        }
+       
       },
     },
   },
