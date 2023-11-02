@@ -74,7 +74,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
         !data.guess &&
         <Button size="xs" w="$full" bgColor="$green500" mt={'$4'} onPress={onGuessConfirm}>
           <HStack alignItems="center">
-            <Text color="$white" fontSize="$xs" fontFamily="heading" mr={'$3'}>
+            <Text color="$white" fontSize="$xs" fontFamily="$heading" mr={'$3'}>
               CONFIRMAR PALPITE
             </Text>
 

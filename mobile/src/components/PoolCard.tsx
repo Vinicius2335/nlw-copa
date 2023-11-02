@@ -1,5 +1,5 @@
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Heading, HStack, Text, VStack } from 'native-base';
+import { Heading, HStack, Text, VStack } from "@gluestack-ui/themed";
 
 import { Participants, ParticipantProps } from './Participants';
 
@@ -26,23 +26,23 @@ export function PoolCard({ data, ...rest }: Props) {
   return (
     <TouchableOpacity {...rest}>
       <HStack
-        w="full"
-        h={20}
-        bgColor="gray.800"
-        borderBottomWidth={3}
-        borderBottomColor="yellow.500"
+        w="$full"
+        h={'$20'}
+        bgColor="$gray800"
+        borderBottomWidth={'$4'}
+        borderBottomColor="$yellow500"
         justifyContent="space-between"
         alignItems="center"
-        rounded="sm"
-        mb={3}
-        p={4}
+        rounded="$sm"
+        mb={'$3'}
+        p={'$4'}
       >
         <VStack>
-          <Heading color="white" fontSize="md" fontFamily="heading">
+          <Heading color="$white" fontSize="$md" fontFamily="$heading">
             {data.title}
           </Heading>
 
-          <Text color="gray.200" fontSize="xs">
+          <Text color="$gray200" fontSize="$xs">
             Criado por {data.owner.name}
           </Text>
         </VStack>

@@ -1,42 +1,46 @@
-import { useEffect, useState } from 'react';
-import { FlatList, useToast } from '@gluestack-ui/themed';
+import { useEffect, useState } from "react"
+import { FlatList, Toast, useToast } from "@gluestack-ui/themed"
 
 // import { api } from '../services/api';
 
-//BUG - FUDEU
-
-import { Game, GameProps } from '../components/Game';
-import { EmptyMyPoolList } from './EmptyMyPoolList';
-import Loading from './generic/Loading';
+import { EmptyMyPoolList } from "./EmptyMyPoolList"
+import Loading from "./generic/Loading"
+import { Game, GameProps } from "./Game"
+import { ToastBody } from "./generic/ToastBody"
 
 interface Props {
-  poolId: string;
-  code: string;
+  poolId: string
+  code: string
 }
 
 export function Guesses({ poolId, code }: Props) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [games, setGames] = useState<GameProps[]>([]);
-  const [firstTeamPoints, setFirstTeamPoints] = useState('');
-  const [secondTeamPoints, setSecondTeamPoints] = useState('');
+  const [isLoading, setIsLoading] = useState(true)
+  const [games, setGames] = useState<GameProps[]>([])
+  const [firstTeamPoints, setFirstTeamPoints] = useState("")
+  const [secondTeamPoints, setSecondTeamPoints] = useState("")
 
-  const toast = useToast();
+  const toast = useToast()
 
   async function fetchGames() {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
 
       // const response = await api.get(`/pools/${poolId}/games`);
       // setGames(response.data.games);
     } catch (error) {
-
       toast.show({
-        title: 'Não foi possível listar os jogos',
-        placement: 'top',
-        bgColor: 'red.500'
-      });
+        placement: "top",
+        render: ({ id }) => {
+          return (
+            <Toast nativeID={"toast-" + id} action="error" variant="solid">
+              <ToastBody title="Erro!" description="Não foi possível listar os jogos" />
+            </Toast>
+          )
+        }
+      })
+
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
@@ -44,39 +48,53 @@ export function Guesses({ poolId, code }: Props) {
     try {
       if (!firstTeamPoints.trim() || !secondTeamPoints.trim()) {
         return toast.show({
-          title: 'Informe o placar para palpitar',
-          placement: 'top',
-          bgColor: 'red.500'
-        });
+          placement: "top",
+          render: ({ id }) => {
+            return (
+              <Toast nativeID={"toast-" + id} action="attention" variant="solid">
+                <ToastBody title="Erro!" description="Informe o placar para palpitar" />
+              </Toast>
+            )
+          }
+        })
       }
 
-      await api.post(`/pools/${poolId}/games/${gameId}/guesses`, {
-        firstTeamPoints: Number(firstTeamPoints),
-        secondTeamPoints: Number(secondTeamPoints),
-      });
+      // await api.post(`/pools/${poolId}/games/${gameId}/guesses`, {
+      //   firstTeamPoints: Number(firstTeamPoints),
+      //   secondTeamPoints: Number(secondTeamPoints),
+      // });
 
       toast.show({
-        title: 'Palpite realizado com sucesso!',
-        placement: 'top',
-        bgColor: 'green.500'
-      });
+        placement: "top",
+        render: ({ id }) => {
+          return (
+            <Toast nativeID={"toast-" + id} action="success" variant="solid">
+              <ToastBody title="Sucesso!" description="Palpite realizado com sucesso!" />
+            </Toast>
+          )
+        }
+      })
 
-      fetchGames();
-
+      fetchGames()
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
       toast.show({
-        title: 'Não foi possível enviar o palpite',
-        placement: 'top',
-        bgColor: 'red.500'
-      });
+        placement: "top",
+        render: ({ id }) => {
+          return (
+            <Toast nativeID={"toast-" + id} action="error" variant="solid">
+              <ToastBody title="Erro!" description="Não foi possível enviar o palpite" />
+            </Toast>
+          )
+        }
+      })
     }
   }
 
   useEffect(() => {
-    fetchGames();
-  }, []);
+    fetchGames()
+  }, [])
 
   if (isLoading) {
     return <Loading />
@@ -85,17 +103,17 @@ export function Guesses({ poolId, code }: Props) {
   return (
     <FlatList
       data={games}
-      keyExtractor={item => item.id}
-      renderItem={({ item }) => (
+      keyExtractor={(item: GameProps) => item.id}
+      renderItem={({ item }: any) => (
         <Game
-          data={item}
+          data={item as GameProps}
           setFirstTeamPoints={setFirstTeamPoints}
           setSecondTeamPoints={setSecondTeamPoints}
           onGuessConfirm={() => handleGuessConfirm(item.id)}
         />
       )}
-      _contentContainerStyle={{ pb: 10 }}
+      contentContainerStyle={{ paddingBottom: 10 }}
       ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
     />
-  );
+  )
 }
