@@ -6,11 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Builder
-public class PoolRequest {
-    @NotBlank(message = "Title cannot be null or blank")
-    private String title;
+@AllArgsConstructor
+@NoArgsConstructor
+public class AuthRequest {
+    @NotBlank(message = "Email cannot be null or blank")
+    private String email;
+
+    @NotBlank(message = "Password cannot be null or blank")
+    private String password;
 }

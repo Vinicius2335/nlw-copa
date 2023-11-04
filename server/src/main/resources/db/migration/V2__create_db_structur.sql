@@ -10,33 +10,31 @@ CREATE TABLE IF NOT EXISTS user (
 
 ALTER TABLE user ADD CONSTRAINT uc_user_email UNIQUE (email);
 
--- Refac table pool
-DROP TABLE IF EXISTS pool;
-CREATE TABLE IF NOT EXISTS pool (
+-- Refac table poll
+DROP TABLE IF EXISTS poll;
+CREATE TABLE IF NOT EXISTS poll (
   id VARCHAR(36) NOT NULL,
    title VARCHAR(255) NOT NULL,
    code VARCHAR(6) NOT NULL,
    created_at TIMESTAMP,
    owner_id VARCHAR(36),
-   CONSTRAINT pk_pool PRIMARY KEY (id)
+   CONSTRAINT pk_poll PRIMARY KEY (id)
 );
 
-ALTER TABLE pool ADD CONSTRAINT uc_pool_code UNIQUE (code);
+ALTER TABLE poll ADD CONSTRAINT uc_poll_code UNIQUE (code);
 
-ALTER TABLE pool ADD CONSTRAINT uc_pool_owner UNIQUE (owner_id);
-
-ALTER TABLE pool ADD CONSTRAINT FK_POOL_ON_OWNER FOREIGN KEY (owner_id) REFERENCES user (id);
+ALTER TABLE poll ADD CONSTRAINT FK_POLL_ON_OWNER FOREIGN KEY (owner_id) REFERENCES user (id);
 
 -- Participante
 CREATE TABLE IF NOT EXISTS participant (
   id VARCHAR(36) NOT NULL,
    created_at TIMESTAMP,
    user_id VARCHAR(36) NOT NULL,
-   pool_id VARCHAR(36) NOT NULL,
+   poll_id VARCHAR(36) NOT NULL,
    CONSTRAINT pk_participant PRIMARY KEY (id)
 );
 
-ALTER TABLE participant ADD CONSTRAINT FK_PARTICIPANT_ON_POOL FOREIGN KEY (pool_id) REFERENCES pool (id);
+ALTER TABLE participant ADD CONSTRAINT FK_PARTICIPANT_ON_POLL FOREIGN KEY (poll_id) REFERENCES poll (id);
 
 ALTER TABLE participant ADD CONSTRAINT FK_PARTICIPANT_ON_USER FOREIGN KEY (user_id) REFERENCES user (id);
 

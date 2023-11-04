@@ -9,7 +9,7 @@ VALUES
 -- Criando um bolão
 INSERT
 INTO
-  pool
+  poll
   (id, title, code, owner_id, created_at)
 VALUES
   ('9a7cfacb-4a46-42ec-9ebf-ef3222c209a3', 'Example Pool', 'BOL123', 'edc85e0f-1025-4823-bfaf-1a42de153426', NOW());
@@ -18,7 +18,7 @@ VALUES
 INSERT
 INTO
   participant
-  (id, user_id, pool_id, created_at)
+  (id, user_id, poll_id, created_at)
 VALUES
   ('c9fa488e-c370-4d34-8738-dec284797450', 'edc85e0f-1025-4823-bfaf-1a42de153426', '9a7cfacb-4a46-42ec-9ebf-ef3222c209a3', NOW());
 

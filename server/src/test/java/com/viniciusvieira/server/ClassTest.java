@@ -1,9 +1,9 @@
 package com.viniciusvieira.server;
 
 
-import com.viniciusvieira.server.api.mapper.PoolMapper;
-import com.viniciusvieira.server.api.representation.model.response.PoolResponse;
-import com.viniciusvieira.server.domain.model.Pool;
+import com.viniciusvieira.server.api.mapper.PollMapper;
+import com.viniciusvieira.server.api.representation.model.response.PollResponse;
+import com.viniciusvieira.server.domain.model.Poll;
 import com.viniciusvieira.server.domain.model.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClassTest {
     @Test
     void testPoolMapper(){
-        PoolMapper poolMapper = new PoolMapper(new ModelMapper());
+        PollMapper pollMapper = new PollMapper(new ModelMapper());
 
         User user = User.builder()
                 .id(UUID.randomUUID())
@@ -27,7 +27,7 @@ class ClassTest {
                 .avatarUrl("dale")
                 .build();
 
-        Pool pool = Pool.builder()
+        Poll poll = Poll.builder()
                 .id(UUID.randomUUID())
                 .createdAt(OffsetDateTime.now())
                 .title("Examplo")
@@ -36,8 +36,8 @@ class ClassTest {
                 .build();
 
         assertDoesNotThrow(() -> {
-            PoolResponse poolResponse = poolMapper.toPoolResponse(pool);
-            System.out.println(poolResponse);
+            PollResponse pollResponse = pollMapper.toPollResponse(poll);
+            System.out.println(pollResponse);
         });
     }
 

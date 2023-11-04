@@ -22,6 +22,6 @@ public class Participant extends BasicEntity {
 
     // 1 participante sempre estára associado a - 1 bolão
     @ManyToOne(optional = false)
-    @JoinColumn(name="pool_id", nullable=false)
-    private Pool pool;
+    @JoinColumn(name="poll_id", nullable=false)
+    private Poll poll;
 }
