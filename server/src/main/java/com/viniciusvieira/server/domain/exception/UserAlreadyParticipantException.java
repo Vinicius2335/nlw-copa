@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.io.Serial;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UserAlreadyParticipant extends RuntimeException{
+public class UserAlreadyParticipantException extends RuntimeException{
     @Serial
     private static final long serialVersionUID = 6281250264794985565L;
 
-    public UserAlreadyParticipant() {
+    public UserAlreadyParticipantException() {
         super();
     }
 
-    public UserAlreadyParticipant(String message) {
+    public UserAlreadyParticipantException(String message) {
         super(message);
     }
 }

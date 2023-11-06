@@ -2,8 +2,6 @@ package com.viniciusvieira.server.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -17,8 +15,7 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class Game extends BasicEntity {
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, columnDefinition = "timestamp")
     private OffsetDateTime date;
 
     // ISO code paises, cada pais pode ser representado por um código numérico

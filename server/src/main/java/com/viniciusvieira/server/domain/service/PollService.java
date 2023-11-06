@@ -5,10 +5,11 @@ import com.viniciusvieira.server.api.representation.model.request.CreatePollRequ
 import com.viniciusvieira.server.api.representation.model.request.EnterPollRequest;
 import com.viniciusvieira.server.api.representation.model.response.AvatarParticipantResponse;
 import com.viniciusvieira.server.api.representation.model.response.CustomPollResponse;
+import com.viniciusvieira.server.api.representation.model.response.ParticipantUserResponse;
 import com.viniciusvieira.server.api.representation.model.response.PollResponse;
 import com.viniciusvieira.server.common.util.ExtractEntityUtils;
-import com.viniciusvieira.server.domain.exception.PollNotFound;
-import com.viniciusvieira.server.domain.exception.UserAlreadyParticipant;
+import com.viniciusvieira.server.domain.exception.PollNotFoundException;
+import com.viniciusvieira.server.domain.exception.UserAlreadyParticipantException;
 import com.viniciusvieira.server.domain.model.Participant;
 import com.viniciusvieira.server.domain.model.Poll;
 import com.viniciusvieira.server.domain.model.User;
@@ -18,10 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -73,7 +71,6 @@ public class PollService {
 
     /**
      * Cria um novo participante para um bolão.
-     *
      * @param request corpo da requisição com o código do bolão.
      */
     @Transactional
@@ -97,31 +94,30 @@ public class PollService {
         );
 
         if (userAlreadyParticipantInThePoll) {
-            throw new UserAlreadyParticipant("You already joined this poll");
+            throw new UserAlreadyParticipantException("You already joined this poll");
         }
 
         // Se deu tudo certo, cria/insere o novo participante
         participantService.createParticipant(user, poll);
     }
 
-    public Poll findByCodeOrThrows(String code) {
+    public Poll findByCodeOrThrows(String code) throws PollNotFoundException {
         return pollRepository.findByCode(code)
                 .orElseThrow(
-                        () -> new PollNotFound("Poll not found...")
+                        () -> new PollNotFoundException("Poll not found...")
                 );
     }
 
     /**
      * Busca todos os bolões que o usuário está participando
-     *
      * @return lista de bolões
      */
-    public List<CustomPollResponse> getPolls() {
+    public List<CustomPollResponse> getPollsResponse() {
         List<CustomPollResponse> response = new ArrayList<>();
         User user = ExtractEntityUtils.extractEntityFromContex();
 
         // logica para extrair todos os boloes que o usuário está participando
-        List<Participant> allParticipantingList = participantService.getAllPollsUserParticipating(user.getId());
+        List<Participant> allParticipantingList = participantService.findAllParticipantsByIdUser(user.getId());
         List<Poll> pollList = allParticipantingList.stream()
                 .map(Participant::getPoll)
                 .toList();
@@ -130,16 +126,16 @@ public class PollService {
         // o número de participantes por bolao
         // os 4 primeiros avatares dos participantes
         pollList.forEach(poll -> {
-            List<Participant> participantsByPollId = participantService.getAllParticipantsByPollId(poll.getId());
-            int count = participantsByPollId.size();
+            List<Participant> participantsByIdPoll = participantService.findAllParticipantsByIdPoll(poll.getId());
+            int count = participantsByIdPoll.size();
 
-            List<AvatarParticipantResponse> participants = participantsByPollId.stream()
+            List<AvatarParticipantResponse> participants = participantsByIdPoll.stream()
                     .map(participant -> new AvatarParticipantResponse(participant.getUser().getAvatarUrl()))
                     .limit(4)
                     .toList();
 
             PollResponse pollResponse = pollMapper.toPollResponse(poll);
-            CustomPollResponse customPollResponse = new CustomPollResponse().builder()
+            CustomPollResponse customPollResponse = CustomPollResponse.builder()
                     .poll(pollResponse)
                     .count(count)
                     .participants(participants)
@@ -148,6 +144,26 @@ public class PollService {
         });
 
         return response;
+    }
+    // getPollById  findByIdOrThorws
+    public CustomPollResponse getPollResponseById(UUID idPoll){
+        Poll poll = findPollsByIdOrThorws(idPoll);
+
+        List<Participant> participantsByIdPoll = participantService.findAllParticipantsByIdPoll(idPoll);
+        int count = participantsByIdPoll.size();
+
+        List<ParticipantUserResponse> participantsResponse = participantService.converterToParticipantUserResponseList(participantsByIdPoll);
+
+        return CustomPollResponse.builder()
+                .poll(pollMapper.toPollResponse(poll))
+                .participants(participantsResponse)
+                .count(count)
+                .build();
+    }
+
+    public Poll findPollsByIdOrThorws(UUID idPoll) throws PollNotFoundException {
+        return pollRepository.findById(idPoll)
+                .orElseThrow(() -> new PollNotFoundException("Poll not found..."));
     }
 
 }

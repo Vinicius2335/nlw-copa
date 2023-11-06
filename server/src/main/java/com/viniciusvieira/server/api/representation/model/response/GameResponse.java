@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.OffsetDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class CustomPollResponse {
-    private PollResponse poll;
-    private Integer count;
-    private List<?> participants;
+public class GameResponse {
+    private String id;
+    private String firstTeamCountryCode;
+    private String secondTeamCountryCode;
+    private OffsetDateTime date;
 }

@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.io.Serial;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class PollNotFound extends RuntimeException{
+public class GameNotFoundException extends RuntimeException{
     @Serial
     private static final long serialVersionUID = 8386515803956008120L;
 
-    public PollNotFound() {
+    public GameNotFoundException() {
         super();
     }
 
-    public PollNotFound(String message) {
+    public GameNotFoundException(String message) {
         super(message);
     }
 }

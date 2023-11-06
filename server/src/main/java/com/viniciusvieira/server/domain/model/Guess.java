@@ -27,6 +27,7 @@ public class Guess extends BasicEntity {
     @JoinColumn(name="game_id", nullable=false)
     private Game game;
 
+    // BUG : mudar para participant_id + a migration
     // Muitos palpites - estão relacionados a - 1 participante
     @ManyToOne(optional=false)
     @JoinColumn(name="participant", nullable=false)

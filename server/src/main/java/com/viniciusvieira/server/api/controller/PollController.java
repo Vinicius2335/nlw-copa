@@ -3,7 +3,6 @@ package com.viniciusvieira.server.api.controller;
 import com.viniciusvieira.server.api.representation.model.request.CreatePollRequest;
 import com.viniciusvieira.server.api.representation.model.request.EnterPollRequest;
 import com.viniciusvieira.server.api.representation.model.response.CustomPollResponse;
-import com.viniciusvieira.server.api.representation.model.response.PollResponse;
 import com.viniciusvieira.server.domain.service.PollService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/polls")
@@ -30,7 +30,7 @@ public class PollController {
     }
 
     /**
-     * Rota para criar um bolão. Funciona para usuários logados ou não.
+     * Rota responsável por criar um bolão. Funciona para usuários logados ou não.
      * @param createPollRequest campos necessários para criar um bolão válido.
      * @return o código único do bolão criado.
      */
@@ -42,8 +42,9 @@ public class PollController {
     }
 
     /**
-     * Rota para entrar no bolão, é necessário estar autenticado
-     * @return nothing
+     * Rota responsável em registrar o usuário autenticado num bolão.
+     * @param request corpo da requisição que deve conter o código de um bolão.
+     * @return
      */
     @PostMapping("/join")
     @PreAuthorize("hasRole('USER')")
@@ -53,12 +54,22 @@ public class PollController {
     }
 
     /**
-     * Rota retorna todos os bolões que o usuário autenticado está participando
-     * @return lista de bolões
+     * Rota reponável por buscar todos os bolões que o usuário autenticado está participando.
+     * @return lista de bolões.
      */
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<CustomPollResponse>> getPolls(){
-        return ResponseEntity.ok(pollService.getPolls());
+        return ResponseEntity.ok(pollService.getPollsResponse());
+    }
+
+    /**
+     * Rota responável por buscar um bolão apartir de seu id.
+     * @param idPoll id do bolão.
+     * @return bolão.
+     */
+    @GetMapping("/{idPoll}")
+    public ResponseEntity<CustomPollResponse> getPollById(@PathVariable UUID idPoll){
+        return ResponseEntity.ok(pollService.getPollResponseById(idPoll));
     }
 }

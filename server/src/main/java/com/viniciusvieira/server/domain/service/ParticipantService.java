@@ -1,5 +1,8 @@
 package com.viniciusvieira.server.domain.service;
 
+import com.viniciusvieira.server.api.mapper.ParticipantMapper;
+import com.viniciusvieira.server.api.representation.model.response.ParticipantUserResponse;
+import com.viniciusvieira.server.domain.exception.ParticipantNotFoundException;
 import com.viniciusvieira.server.domain.model.Participant;
 import com.viniciusvieira.server.domain.model.Poll;
 import com.viniciusvieira.server.domain.model.User;
@@ -16,6 +19,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ParticipantService {
     private final ParticipantRepository participantRepository;
+    private final ParticipantMapper participantMapper;
 
     @Transactional
     public void createParticipant(User user, Poll poll){
@@ -32,17 +36,24 @@ public class ParticipantService {
         return participant.isPresent();
     }
 
-    public List<Participant> getAllPollsUserParticipating(UUID idUser){
+    public List<Participant> findAllParticipantsByIdUser(UUID idUser){
         return participantRepository.findByUserId(idUser);
     }
 
-    public List<Participant> getAllParticipantsByPollId(UUID idPoll){
+    public List<Participant> findAllParticipantsByIdPoll(UUID idPoll){
         return participantRepository.findByPollId(idPoll);
     }
 
-    public int countPollParticipantsByPollId(UUID idPoll){
-        List<Participant> participants = participantRepository.findByPollId(idPoll);
-        return participants.size();
+    public List<ParticipantUserResponse> converterToParticipantUserResponseList(List<Participant> participants){
+        return participantMapper.toListParticipantUserResponse(participants);
     }
 
+    public Participant findParticipantByUserAndPollOrThrows(User user, Poll poll) throws ParticipantNotFoundException {
+        return findParticipantByIdUserAndIdPoll(user.getId(), poll.getId())
+                .orElseThrow(() -> new ParticipantNotFoundException("Participant not found..."));
+    }
+
+    public Optional<Participant> findParticipantByIdUserAndIdPoll(UUID idUser, UUID idPoll){
+        return participantRepository.findByUserIdAndPollId(idUser, idPoll);
+    }
 }

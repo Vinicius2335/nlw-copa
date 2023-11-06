@@ -5,14 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class CustomPollResponse {
-    private PollResponse poll;
-    private Integer count;
-    private List<?> participants;
+public class CustomGameResponse {
+    private GameResponse game;
+    private GuessResponse guess;
 }
