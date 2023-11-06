@@ -1,14 +1,14 @@
-import { PoolForm } from "@/components/PoolForm"
 import { api } from "@/libs/axios"
 import Image from "next/image"
 import appPreviewImg from "../assets/app-nlw-copa-preview.png"
 import iconCheckImg from "../assets/icon-check.svg"
 import logoImg from "../assets/logo.svg"
 import usersAvatarExampleImg from "../assets/users-avatar-example.png"
+import { PollForm } from "@/components/PollForm"
 
 export default async function Home() {
-  const poolCountResponse = await api.get("/pools/count")
-  const poolCount = poolCountResponse.data.count
+  const pollCountResponse = await api.get("/polls/count")
+  const pollCount = pollCountResponse.data.count
 
   const userCountResponse = await api.get("/users/count")
   const userCount = userCountResponse.data.count
@@ -33,7 +33,7 @@ export default async function Home() {
           </strong>
         </div>
 
-        <PoolForm />
+        <PollForm />
 
         <p className="mt-4 text-sm text-gray-300 leading-relaxed">
           Após criar seu bolão, você receberá um código único que poderá usar para convidar outras
@@ -44,7 +44,7 @@ export default async function Home() {
           <div className="flex items-center gap-6">
             <Image src={iconCheckImg} alt="Icone de Check" />
             <div className="flex flex-col">
-              <span className="font-bold text-2xl">+{poolCount}</span>
+              <span className="font-bold text-2xl">+{pollCount}</span>
               <span>Bolões criados</span>
             </div>
           </div>
