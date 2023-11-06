@@ -3,7 +3,7 @@ import { Heading, HStack, Text, VStack } from "@gluestack-ui/themed";
 
 import { Participants, ParticipantProps } from './Participants';
 
-export interface PoolCardPros {
+export interface PollCardPros {
   id: string;
   code: string;
   title: string;
@@ -19,10 +19,10 @@ export interface PoolCardPros {
 }
 
 interface Props extends TouchableOpacityProps {
-  data: PoolCardPros;
+  data: PollCardPros;
 }
 
-export function PoolCard({ data, ...rest }: Props) {
+export function PollCard({ data, ...rest }: Props) {
   return (
     <TouchableOpacity {...rest}>
       <HStack

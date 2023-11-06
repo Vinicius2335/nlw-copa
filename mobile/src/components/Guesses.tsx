@@ -3,7 +3,7 @@ import { FlatList, Toast, useToast } from "@gluestack-ui/themed"
 
 // import { api } from '../services/api';
 
-import { EmptyMyPoolList } from "./EmptyMyPoolList"
+import { EmptyMyPollList } from "./EmptyMyPollList"
 import Loading from "./generic/Loading"
 import { Game, GameProps } from "./Game"
 import { ToastBody } from "./generic/ToastBody"
@@ -38,7 +38,6 @@ export function Guesses({ poolId, code }: Props) {
           )
         }
       })
-
     } finally {
       setIsLoading(false)
     }
@@ -113,7 +112,7 @@ export function Guesses({ poolId, code }: Props) {
         />
       )}
       contentContainerStyle={{ paddingBottom: 10 }}
-      ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
+      ListEmptyComponent={() => <EmptyMyPollList code={code} />}
     />
   )
 }

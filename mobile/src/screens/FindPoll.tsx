@@ -5,7 +5,7 @@ import { Header } from "../components/layout/Header"
 
 const CustomInput = styled(Input, {})
 
-export function FindPool() {
+export function FindPoll() {
   return (
     <VStack flex={1} bgColor="$gray900">
       <Header onShare={() => {}} title="Buscar por código" />

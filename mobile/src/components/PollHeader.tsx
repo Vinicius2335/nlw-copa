@@ -1,13 +1,13 @@
 import { Heading, HStack, Text, VStack } from "@gluestack-ui/themed";
 
-import { PoolCardPros } from './PoolCard';
+import { PollCardPros } from './PollCard';
 import { Participants } from './Participants';
 
 interface Props {
-  data: PoolCardPros;
+  data: PollCardPros;
 }
 
-export function PoolHeader({ data }: Props) {
+export function PollHeader({ data }: Props) {
   return (
     <HStack
       w="$full"

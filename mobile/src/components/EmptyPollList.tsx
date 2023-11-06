@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { HStack, Text, Pressable } from "@gluestack-ui/themed";
 
-export function EmptyPoolList() {
+export function EmptyPollList() {
 
   const { navigate } = useNavigation();
 

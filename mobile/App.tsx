@@ -11,9 +11,9 @@ import {
 // import Loading from "./src/components/generic/Loading"
 import Signin from "./src/screens/Signin"
 import { AuthContextProvicer } from "./src/contexts/AuthContext"
-import { NewPool } from "./src/screens/NewPool"
-import { FindPool } from "./src/screens/FindPool"
-import { Pools } from "./src/screens/Pools"
+import { NewPoll } from "./src/screens/NewPoll"
+import { FindPoll } from "./src/screens/FindPoll"
+import { Polls } from "./src/screens/Polls"
 
 export default function App() {
   //  let [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_500Medium, Roboto_700Bold });
@@ -26,7 +26,7 @@ export default function App() {
         {/* <Signin /> */}
         {/* <NewPool /> */}
         {/* <FindPool /> */}
-        <Pools />
+        <Polls />
       </AuthContextProvicer>
     </GluestackUIProvider>
   )

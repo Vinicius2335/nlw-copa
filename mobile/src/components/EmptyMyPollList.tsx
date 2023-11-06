@@ -5,7 +5,7 @@ interface Props {
   code: string
 }
 
-export function EmptyMyPoolList({ code }: Props) {
+export function EmptyMyPollList({ code }: Props) {
   async function handleCodeShare() {
     await Share.share({
       message: code
@@ -13,7 +13,7 @@ export function EmptyMyPoolList({ code }: Props) {
   }
 
   return (
-    <HStack flexWrap="wrap" justifyContent="center" p={'$4'}>
+    <HStack flexWrap="wrap" justifyContent="center" p={"$4"}>
       <Text color="gray.200" fontSize="$sm">
         Esse bolão ainda não tem participantes, que tal
       </Text>

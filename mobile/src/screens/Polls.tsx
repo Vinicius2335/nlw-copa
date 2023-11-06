@@ -3,7 +3,7 @@ import { Button } from "../components/generic/Button"
 import { Header } from "../components/layout/Header"
 import { MagnifyingGlass } from "phosphor-react-native"
 
-export function Pools() {
+export function Polls() {
   const blackThemeColor = useToken("colors", "black")
   const mdThemeSize = useToken("size", "md")
 
@@ -18,10 +18,7 @@ export function Pools() {
         mb={"$4"}
       >
         <Header onShare={() => {}} title="Meus Bolões" />
-        <Button
-          title="Buscar bolão por código"
-          icon={MagnifyingGlass}
-        />
+        <Button title="Buscar bolão por código" icon={MagnifyingGlass} />
 
         {/* TODO - Lista de bolões depende do backend */}
       </VStack>
