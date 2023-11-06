@@ -9,11 +9,11 @@ import { Game, GameProps } from "./Game"
 import { ToastBody } from "./generic/ToastBody"
 
 interface Props {
-  poolId: string
+  pollId: string
   code: string
 }
 
-export function Guesses({ poolId, code }: Props) {
+export function Guesses({ pollId, code }: Props) {
   const [isLoading, setIsLoading] = useState(true)
   const [games, setGames] = useState<GameProps[]>([])
   const [firstTeamPoints, setFirstTeamPoints] = useState("")
@@ -25,7 +25,7 @@ export function Guesses({ poolId, code }: Props) {
     try {
       setIsLoading(true)
 
-      // const response = await api.get(`/pools/${poolId}/games`);
+      // const response = await api.get(`/polls/${pollId}/games`);
       // setGames(response.data.games);
     } catch (error) {
       toast.show({
@@ -58,7 +58,7 @@ export function Guesses({ poolId, code }: Props) {
         })
       }
 
-      // await api.post(`/pools/${poolId}/games/${gameId}/guesses`, {
+      // await api.post(`/polls/${pollId}/games/${gameId}/guesses`, {
       //   firstTeamPoints: Number(firstTeamPoints),
       //   secondTeamPoints: Number(secondTeamPoints),
       // });

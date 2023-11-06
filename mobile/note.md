@@ -13,7 +13,7 @@
 
 > Falta arrumar Guesses
 > Participants
-> PoolCard
+> PollCard
 > PollHeader
   
 

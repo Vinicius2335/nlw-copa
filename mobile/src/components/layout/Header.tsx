@@ -21,7 +21,7 @@ export function Header({ title, showBackButton = false, showShareButton = false,
       px={"$5"}>
       <HStack w="$full" alignItems="center" justifyContent="space-between">
         {showBackButton ? (
-          // TODO - onPress={() => navigate("pools")}
+          // TODO - onPress={() => navigate("polls")}
           <ButtonIcon icon={CaretLeft} />
         ) : (
           <EmptyBoxSpace />

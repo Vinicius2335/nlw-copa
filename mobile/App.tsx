@@ -24,8 +24,8 @@ export default function App() {
         <StatusBar barStyle="light-content" backgroundColor={"$transparent"} translucent />
         {/* {fontsLoaded ? <Loading /> : <Signin />} */}
         {/* <Signin /> */}
-        {/* <NewPool /> */}
-        {/* <FindPool /> */}
+        {/* <NewPoll /> */}
+        {/* <FindPoll /> */}
         <Polls />
       </AuthContextProvicer>
     </GluestackUIProvider>
