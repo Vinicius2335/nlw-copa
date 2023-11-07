@@ -1,27 +1,27 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
-import * as AuthSession from "expo-auth-session" 
-import * as WebBrowser from "expo-web-browser"
-import * as Google from "expo-auth-session/providers/google"
-// import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { ReactNode, createContext, useState } from "react";
+import { api } from "../services/api";
 
-// BUG - ULTIMA TENTATIVA DE LOGAR COM O GOOGLE https://www.youtube.com/watch?v=vojHmGUGUGc
-
-WebBrowser.maybeCompleteAuthSession();
+interface LoginResponseProps {
+	token: string;
+	user: UserProps;
+}
 
 interface UserProps {
   name: string,
   avatarUrl: string
 }
 
-export interface AuthContextDataProps {
-  user: UserProps;
-  isUserLoading: boolean,
-  signIn: () => Promise<void>
-}
-
 interface AuthProviderProps {
   children: ReactNode
 }
+
+export interface AuthContextDataProps {
+  user: UserProps;
+  isUserLoading: boolean,
+  accessToken: string
+  signIn: (email: string, password: string) => Promise<void>
+}
+
 
 // Armazena o conteúdo do nosso contexto
 export const AuthContext = createContext({} as AuthContextDataProps);
@@ -30,19 +30,22 @@ export const AuthContext = createContext({} as AuthContextDataProps);
 export function AuthContextProvicer({ children }: AuthProviderProps) {
   const [isUserLoading, setIsUserLoading] = useState(false)
   const [user, setUser] = useState<UserProps>({} as UserProps)
+  const [token, setToken] = useState('')
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '99951594318-lhegiska59le22igg2pqnlstkib7k5bq.apps.googleusercontent.com',
-    redirectUri: AuthSession.makeRedirectUri(),
-    scopes: ['profile', 'email']
-  })
-
-  console.log(AuthSession.makeRedirectUri())
-
-  async function signIn(){
+  async function signIn(email: string, password: string){
     try {
       setIsUserLoading(true)
-      await promptAsync();
+      const response = await api.post<LoginResponseProps>("/auth/login", {
+        email,
+        password
+      }).then(resp => resp.data)
+
+      // adicionando em todas as requisiçoes um cabeçalho
+      api.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+
+      setUser(response.user)
+      setToken(response.token)
+
 
     } catch(error){
       console.error(error);
@@ -53,24 +56,12 @@ export function AuthContextProvicer({ children }: AuthProviderProps) {
     }
   }
 
-
-  // TODO - PROX AULA 
-  async function signWithGoogle(accessToken: string){
-    console.log('token de authenticação ==> ', accessToken)
-  }
-
-  useEffect(() => {
-    if (response?.type === 'success' && response.authentication?.accessToken){
-      signWithGoogle(response.authentication.accessToken)
-    }
-  }, [response])
-
-
   return (
     <AuthContext.Provider value={{
       signIn,
       isUserLoading,
       user,
+      accessToken: token
     }}>
       { children }
     </AuthContext.Provider>

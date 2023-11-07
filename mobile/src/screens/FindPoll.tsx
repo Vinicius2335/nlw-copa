@@ -6,9 +6,10 @@ import { Header } from "../components/layout/Header"
 const CustomInput = styled(Input, {})
 
 export function FindPoll() {
+
   return (
     <VStack flex={1} bgColor="$gray900">
-      <Header onShare={() => {}} title="Buscar por código" />
+      <Header onShare={() => {}} title="Buscar por código" showBackButton/>
 
       <VStack mt="$8" mx="$5" alignItems="center">
         <Heading fontFamily="$heading" color="$white" fontSize={"$xl"} mb={"$8"} textAlign="center">
@@ -18,7 +19,7 @@ export function FindPoll() {
 
         <CustomInput mt={"$2"} mb={"$4"} placeholder="Qual código do bolão?" />
 
-        <Button title="Buscar bolão" />
+        <Button title="Buscar bolão"/>
       </VStack>
     </VStack>
   )

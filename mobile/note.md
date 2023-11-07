@@ -10,6 +10,8 @@
 - `npx expo install expo-web-browser` - Para cuidar do processo de abrir o browser / voltar para o app
 - `npx expo install @react-native-google-signin/google-signin`
 - `npm install @react-navigation/native` - navegação
+  - `npx expo install react-native-screens react-native-safe-area-context` - complementos necessário para o navigate 
+  - `npm install @react-navigation/bottom-tabs` - para a navegaçao por tab
 
 > Falta arrumar Guesses
 > Participants
@@ -30,11 +32,22 @@
   3. criar a pasta @types para todas as tipagens
   4. criar o arquivo svg.d.ts
 
+- Como trabalhar com o navigate
+  0. [Documentação](https://reactnavigation.org/docs/tab-based-navigation)
+  1. instalar a dependencia e seus complementos
+  2. criando as rotas
+    1. criar a pasta routes
+    2. criar o arquivo app.routes.tsx
+    3. criar o arquivo index.tsx
+  3. adicionar o routes em App.tsx
+  4. criar uma tipagem para as rotas
+    1. criar em @types o arquivo -> navigation.d.ts
+
 # 👀 Obs
 
 - React Native Trabalha com Independencia de pixel, por isso não utiliza pixel.
 - [Exemplo](https://github.com/gluestack/ui-examples/blob/main/kitchensink-components/Banner.tsx) de uso GlueStack
-- Icones com o lucide dá certo
+- Icones com o lucide/phosphor react native - fuuncionam
 
 # ⛔ Erros
 

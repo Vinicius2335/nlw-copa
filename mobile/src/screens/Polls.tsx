@@ -1,14 +1,16 @@
-import { VStack, Icon, useToken } from "@gluestack-ui/themed"
+import { VStack } from "@gluestack-ui/themed"
+import { useNavigation } from "@react-navigation/native"
+import { MagnifyingGlass } from "phosphor-react-native"
 import { Button } from "../components/generic/Button"
 import { Header } from "../components/layout/Header"
-import { MagnifyingGlass } from "phosphor-react-native"
 
 export function Polls() {
-  const blackThemeColor = useToken("colors", "black")
-  const mdThemeSize = useToken("size", "md")
+  const { navigate } = useNavigation()
 
   return (
-    <VStack flex={1} bgColor="$gray800">
+    <VStack flex={1} bgColor="$gray900">
+      <Header onShare={() => {}} title="Meus Bolões" />
+
       <VStack
         mt={"$6"}
         mx={"$5"}
@@ -17,8 +19,7 @@ export function Polls() {
         pb={"$4"}
         mb={"$4"}
       >
-        <Header onShare={() => {}} title="Meus Bolões" />
-        <Button title="Buscar bolão por código" icon={MagnifyingGlass} />
+        <Button title="Buscar bolão por código" icon={MagnifyingGlass} onPress={() => navigate('find')}/>
 
         {/* TODO - Lista de bolões depende do backend */}
       </VStack>

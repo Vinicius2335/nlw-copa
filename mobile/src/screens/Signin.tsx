@@ -1,21 +1,20 @@
 import { Center, Text } from "@gluestack-ui/themed"
+import { RocketLaunch } from "phosphor-react-native"
 import Logo from "../assets/logo.svg"
 import { Button } from "../components/generic/Button"
-import { GoogleLogo } from "phosphor-react-native"
-import { useAuth } from "../hooks/useAuthContext"
+import { useNavigation } from "@react-navigation/native"
 
-export default function Signin() {
-  const { signIn, user } = useAuth();
+export function Signin() {
+  const { navigate } = useNavigation()
 
   return (
     <Center flex={1} bgColor="$gray900" p={'$7'}>
       <Logo width={212} height={40} style={{marginBottom: 48}} />
 
-      <Button title="entrar com google" icon={GoogleLogo} onPress={signIn} />
+      <Button title="Logar" icon={RocketLaunch} onPress={() => {navigate('login')}} />
 
       <Text color="$white" textAlign="center" mt={'$4'}>
-        Não utilizamos nenhuma informação além {`\n`}
-        do seu e-mail para criação de sua conta.
+        Crie seu próprio bolão da copa e compartilhe entre amigos!
       </Text>
     </Center>
   )
