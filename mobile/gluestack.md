@@ -25,8 +25,12 @@ function MyComponent() {
     </StyledButton>
   )
 }
-```
+````
 
 # Forma de aproveitar os styles do GlueStack
 
-`const resolvedGreen = useToken("colors", "green500")`
+- `const resolvedGreen = useToken("colors", "green500")`
+
+
+Component Option é um bom exemplo de usar {...rest}.   
+Todos os componentes herdam as props do react-native.

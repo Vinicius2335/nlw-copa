@@ -9,7 +9,6 @@ interface Props {
   onChangeText: (value: string) => void;
 }
 
-// TEST
 const MyInput = styled(Input, {
   textAlign: "center"
 },

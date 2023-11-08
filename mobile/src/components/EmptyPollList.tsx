@@ -12,23 +12,21 @@ export function EmptyPollList() {
         nenhum bolão, que tal
       </Text>
 
-      // TODO
-      {/* <Pressable onPress={() => navigate('find')}>
+      <Pressable onPress={() => navigate('find')}>
           <Text textDecorationLine="underline" color="$yellow500">
             buscar um por código
           </Text>
-      </Pressable> */}
+      </Pressable>
 
       <Text color="$white" fontSize="$sm" textAlign="center" mx={'$1'}>
         ou
       </Text>
 
-      // TODO
-      {/* <Pressable onPress={() => navigate('new')}>
+      <Pressable onPress={() => navigate('new')}>
         <Text textDecorationLine="underline"  color="$yellow500">
           criar um novo
         </Text>
-      </Pressable> */}
+      </Pressable>
 
       <Text color="$white" fontSize="$sm" textAlign="center">
         ?

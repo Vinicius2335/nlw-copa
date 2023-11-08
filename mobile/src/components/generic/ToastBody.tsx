@@ -8,8 +8,8 @@ interface ToastBodyProps {
 export function ToastBody({ title, description }: ToastBodyProps ) {
   return (
     <VStack space="xs">
-      <ToastTitle>{ title }</ToastTitle>
-      <ToastDescription>
+      <ToastTitle color="$white" >{ title }</ToastTitle>
+      <ToastDescription color="$white">
         { description }
       </ToastDescription>
     </VStack>

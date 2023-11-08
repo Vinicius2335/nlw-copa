@@ -4,7 +4,7 @@ import { FlatList, Toast, useToast } from "@gluestack-ui/themed"
 // import { api } from '../services/api';
 
 import { EmptyMyPollList } from "./EmptyMyPollList"
-import Loading from "./generic/Loading"
+import { Loading } from "./generic/Loading"
 import { Game, GameProps } from "./Game"
 import { ToastBody } from "./generic/ToastBody"
 
@@ -32,7 +32,7 @@ export function Guesses({ pollId, code }: Props) {
         placement: "top",
         render: ({ id }) => {
           return (
-            <Toast nativeID={"toast-" + id} action="error" variant="solid">
+            <Toast mt={'$10'} nativeID={"toast-" + id} action="error" variant="solid">
               <ToastBody title="Erro!" description="Não foi possível listar os jogos" />
             </Toast>
           )
@@ -50,7 +50,7 @@ export function Guesses({ pollId, code }: Props) {
           placement: "top",
           render: ({ id }) => {
             return (
-              <Toast nativeID={"toast-" + id} action="attention" variant="solid">
+              <Toast mt={'$10'} nativeID={"toast-" + id} action="attention" variant="solid">
                 <ToastBody title="Erro!" description="Informe o placar para palpitar" />
               </Toast>
             )
@@ -67,7 +67,7 @@ export function Guesses({ pollId, code }: Props) {
         placement: "top",
         render: ({ id }) => {
           return (
-            <Toast nativeID={"toast-" + id} action="success" variant="solid">
+            <Toast mt={'$10'} nativeID={"toast-" + id} action="success" variant="solid">
               <ToastBody title="Sucesso!" description="Palpite realizado com sucesso!" />
             </Toast>
           )
@@ -82,7 +82,7 @@ export function Guesses({ pollId, code }: Props) {
         placement: "top",
         render: ({ id }) => {
           return (
-            <Toast nativeID={"toast-" + id} action="error" variant="solid">
+            <Toast mt={'$10'} nativeID={"toast-" + id} action="error" variant="solid">
               <ToastBody title="Erro!" description="Não foi possível enviar o palpite" />
             </Toast>
           )

@@ -1,18 +1,19 @@
 import {
   Button as ButtonGluestack,
   ButtonIcon,
-  ButtonText,
-  IButtonProps
+  ButtonSpinner,
+  ButtonText
 } from "@gluestack-ui/themed"
 
 interface ButtonProps {
   title: string
   icon?: any
   type?: "PRIMARY" | "SECONDARY"
-  onPress?: any
+  onPress?: () => void
+  isLoading?: boolean
 }
 
-export function Button({ title, icon, type = "PRIMARY", onPress }: ButtonProps) {
+export function Button({ title, icon, type = "PRIMARY", isLoading = false, onPress }: ButtonProps) {
   return (
     <ButtonGluestack
       w={"$full"}
@@ -20,21 +21,38 @@ export function Button({ title, icon, type = "PRIMARY", onPress }: ButtonProps) 
       rounded={"$sm"}
       bgColor={type === "SECONDARY" ? "$red500" : "$yellow500"}
       onPress={onPress}
+      isDisabled={isLoading}
     >
-      <ButtonIcon
-        as={icon}
-        color={type === "SECONDARY" ? "$white" : "$black"}
-        size="md"
-        mr={"$2"}
-      />
-      <ButtonText
-        color={type === "SECONDARY" ? "$white" : "$black"}
-        fontSize={"$sm"}
-        fontFamily="$heading"
-        textTransform="uppercase"
-      >
-        {title}
-      </ButtonText>
+      {isLoading ? (
+        <>
+          <ButtonSpinner mr={'$4'} />
+          <ButtonText
+            color={type === "SECONDARY" ? "$white" : "$black"}
+            fontSize={"$sm"}
+            fontFamily="$heading"
+            textTransform="uppercase"
+          >
+            Aguarde
+          </ButtonText>
+        </>
+      ) : (
+        <>
+          <ButtonIcon
+            as={icon}
+            color={type === "SECONDARY" ? "$white" : "$black"}
+            size="md"
+            mr={"$2"}
+          />
+          <ButtonText
+            color={type === "SECONDARY" ? "$white" : "$black"}
+            fontSize={"$sm"}
+            fontFamily="$heading"
+            textTransform="uppercase"
+          >
+            {title}
+          </ButtonText>
+        </>
+      )}
     </ButtonGluestack>
   )
 }

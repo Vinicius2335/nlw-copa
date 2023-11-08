@@ -1,15 +1,9 @@
 import { Avatar, AvatarImage, Center, HStack, Text } from "@gluestack-ui/themed"
+import { Participant } from "../@types/entities"
 
-export interface ParticipantProps {
-  id: string
-  user: {
-    name: string
-    avatarUrl: string
-  }
-}
 
 interface Props {
-  participants: ParticipantProps[]
+  participants: Participant[]
   count: number
 }
 
@@ -17,9 +11,9 @@ export function Participants({ participants, count }: Props) {
   return (
     <HStack>
       {participants &&
-        participants.map(participant => (
+        participants.map((participant, index) => (
           <Avatar
-            key={participant.id}
+            key={index}
             w={"$8"}
             h={"$8"}
             rounded="$full"
@@ -28,7 +22,7 @@ export function Participants({ participants, count }: Props) {
             borderColor="$gray800"
           >
             <AvatarImage source={{ uri: participant.user.avatarUrl }} />
-            {participant.user?.name?.at(0).toUpperCase()}
+            {/* {participant.user?.name?.at(0).toUpperCase()} */}
           </Avatar>
         ))}
 

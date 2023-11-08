@@ -8,6 +8,7 @@ import com.viniciusvieira.server.domain.model.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -50,5 +51,15 @@ class ClassTest {
         }
 
         assertEquals(6, code.length());
+    }
+
+    @Test
+    void encodePassword(){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String password = encoder.encode("john123");
+
+        System.out.println(password);
+
+        assertEquals(password.getClass(), String.class);
     }
 }

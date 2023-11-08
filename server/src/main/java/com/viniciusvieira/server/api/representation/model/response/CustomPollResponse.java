@@ -13,6 +13,6 @@ import java.util.List;
 @Builder
 public class CustomPollResponse {
     private PollResponse poll;
-    private Integer count;
-    private List<?> participants;
+    private Integer countParticipants;
+    private List<ParticipantUserResponse> participants;
 }

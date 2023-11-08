@@ -1,8 +1,5 @@
-import {
-  Center,
-  styled
-} from "@gluestack-ui/themed"
-import { Lock, RocketLaunch, User } from "phosphor-react-native"
+import { Center, styled } from "@gluestack-ui/themed"
+import { Lock, SoccerBall, User } from "phosphor-react-native"
 import React, { useState } from "react"
 import Logo from "../assets/logo.svg"
 import { Button } from "../components/generic/Button"
@@ -11,8 +8,9 @@ import { useAuth } from "../hooks/useAuthContext"
 
 const CustomInput = styled(InputForm, {})
 
+// TEST - LIMPAR EMAIL E SENHA
 export function Login() {
-  const { signIn } = useAuth()
+  const { signIn, isUserLoading } = useAuth()
   const [email, setEmail] = useState("vinicius2335@gmail.com")
   const [senha, setSenha] = useState("devdojo")
 
@@ -43,7 +41,7 @@ export function Login() {
         type="PASSWORD"
       />
 
-      <Button title="Entrar" icon={RocketLaunch} onPress={handleTeste} />
+      <Button title="Entrar" icon={SoccerBall} onPress={handleTeste} isLoading={isUserLoading} />
     </Center>
   )
 }

@@ -13,12 +13,6 @@
   - `npx expo install react-native-screens react-native-safe-area-context` - complementos necessário para o navigate 
   - `npm install @react-navigation/bottom-tabs` - para a navegaçao por tab
 
-> Falta arrumar Guesses
-> Participants
-> PollCard
-> PollHeader
-  
-
 # 📝 Lembretes
 
 - Como mudar o projeto para typescript
@@ -51,20 +45,28 @@
 
 # ⛔ Erros
 
-- Erro - `500 Internal Server Error - GET https://registry.npmjs.org/@react-aria%2fvisually-hidden - KV GET failed: 401 Unauthorized`
-- Soluçao - `npm cache clean --force`
+- **Erro** - `500 Internal Server Error - GET https://registry.npmjs.org/@react-aria%2fvisually-hidden - KV GET failed: 401 Unauthorized`
+- **Soluçao** - `npm cache clean --force`
 - é uma biblioteca antiga que não é mais mantida
 - npm uninstall native-base
 
 <br />
 
-- Erro - `fontFamily "Roboto_400Regular" is not a system font and has not been loaded through Font.loadAsync.`
+- **Erro** - `fontFamily "Roboto_400Regular" is not a system font and has not been loaded through Font.loadAsync.`
 - Não funcionou `rm -rf ./node_modules/expo/node_modules/expo-font/`
 - Não carrega a fonte roboto
-- Solução - desistir
+- **Solução** - desistir
 
 <br />
 
-- Erro - `Invariant Violation: requireNativeComponent: "RNSVGSvgView" was not found in the UIManager`
+- **Erro** - `Invariant Violation: requireNativeComponent: "RNSVGSvgView" was not found in the UIManager`
 - Não funciona o svg msm tudo sendo instalado corretamente
-- Soulução - atualizar o react-native-svg
+- **Soulução** - atualizar o react-native-svg
+
+<br />
+
+- Num dia o expo está funcionando e no outro
+- `TypeError: Cannot read properties of undefined (reading 'bodyStream')`
+- `FetchError: request to https://api.expo.dev/v2/sdks/49.0.0/native-modules failed, reason: son: socket hang up`
+- `FetchError: request to https://api.expo.dev/v2/sdks/49.0.0/native-modules failed, reason: Client network socket disconnected before secure TLS connection was established`
+- **Solução** - `npx expo start -c`

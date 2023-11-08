@@ -3,10 +3,7 @@ package com.viniciusvieira.server.domain.service;
 import com.viniciusvieira.server.api.mapper.PollMapper;
 import com.viniciusvieira.server.api.representation.model.request.CreatePollRequest;
 import com.viniciusvieira.server.api.representation.model.request.EnterPollRequest;
-import com.viniciusvieira.server.api.representation.model.response.AvatarParticipantResponse;
-import com.viniciusvieira.server.api.representation.model.response.CustomPollResponse;
-import com.viniciusvieira.server.api.representation.model.response.ParticipantUserResponse;
-import com.viniciusvieira.server.api.representation.model.response.PollResponse;
+import com.viniciusvieira.server.api.representation.model.response.*;
 import com.viniciusvieira.server.common.util.ExtractEntityUtils;
 import com.viniciusvieira.server.domain.exception.PollNotFoundException;
 import com.viniciusvieira.server.domain.exception.UserAlreadyParticipantException;
@@ -129,15 +126,18 @@ public class PollService {
             List<Participant> participantsByIdPoll = participantService.findAllParticipantsByIdPoll(poll.getId());
             int count = participantsByIdPoll.size();
 
-            List<AvatarParticipantResponse> participants = participantsByIdPoll.stream()
-                    .map(participant -> new AvatarParticipantResponse(participant.getUser().getAvatarUrl()))
+            List<ParticipantUserResponse> participants = participantsByIdPoll.stream()
+                    .map(participant -> ParticipantUserResponse.builder().
+                            user(UserResponse.builder().avatarUrl(participant.getUser().getAvatarUrl()).build()).
+                            build()
+                    )
                     .limit(4)
                     .toList();
 
             PollResponse pollResponse = pollMapper.toPollResponse(poll);
             CustomPollResponse customPollResponse = CustomPollResponse.builder()
                     .poll(pollResponse)
-                    .count(count)
+                    .countParticipants(count)
                     .participants(participants)
                     .build();
             response.add(customPollResponse);
@@ -157,7 +157,7 @@ public class PollService {
         return CustomPollResponse.builder()
                 .poll(pollMapper.toPollResponse(poll))
                 .participants(participantsResponse)
-                .count(count)
+                .countParticipants(count)
                 .build();
     }
 

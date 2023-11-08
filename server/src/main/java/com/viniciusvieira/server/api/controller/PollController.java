@@ -44,7 +44,7 @@ public class PollController {
     /**
      * Rota responsável em registrar o usuário autenticado num bolão.
      * @param request corpo da requisição que deve conter o código de um bolão.
-     * @return
+     * @return status code 201
      */
     @PostMapping("/join")
     @PreAuthorize("hasRole('USER')")

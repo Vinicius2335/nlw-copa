@@ -6,6 +6,7 @@ import ptBR from 'dayjs/locale/pt-br';
 
 import { Team } from './Team';
 
+// TODO type - entities
 interface GuessProps {
   id: string;
   gameId: string;
@@ -15,6 +16,7 @@ interface GuessProps {
   secondTeamPoints: number;
 }
 
+// TODO type - entities
 export interface GameProps {
   id: string;
   date: Date;

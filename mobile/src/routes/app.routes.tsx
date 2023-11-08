@@ -7,6 +7,7 @@ import { Login } from "../screens/Login"
 import { NewPoll } from "../screens/NewPoll"
 import { Polls } from "../screens/Polls"
 import { Signin } from "../screens/Signin"
+import { Details } from "../screens/Details"
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -35,7 +36,6 @@ export function AppRoutes() {
         }
       }}
     >
-      
       <Screen
         name="new"
         component={NewPoll}
@@ -58,6 +58,12 @@ export function AppRoutes() {
         name="find"
         component={FindPoll}
         options={{ tabBarButton: () => null }} // hack para a rota não aparecer na tabBar
+      />
+
+      <Screen
+        name="details"
+        component={Details}
+        options={{ tabBarButton: () => null }}
       />
     </Navigator>
   )

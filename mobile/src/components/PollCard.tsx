@@ -1,25 +1,17 @@
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Heading, HStack, Text, VStack } from "@gluestack-ui/themed";
+import { HStack, Heading, Text, VStack } from "@gluestack-ui/themed"
+import { TouchableOpacity, TouchableOpacityProps } from "react-native"
 
-import { Participants, ParticipantProps } from './Participants';
+import { Participant, Poll } from "../@types/entities"
+import { Participants } from "./Participants"
 
-export interface PollCardPros {
-  id: string;
-  code: string;
-  title: string;
-  ownerId: string;
-  createdAt: string;
-  owner: {
-    name: string;
-  },
-  participants: ParticipantProps[];
-  _count: {
-    participants: number;
-  }
+export interface PollCardProps {
+  poll: Poll
+  countParticipants: number
+  participants: Participant[]
 }
 
 interface Props extends TouchableOpacityProps {
-  data: PollCardPros;
+  data: PollCardProps
 }
 
 export function PollCard({ data, ...rest }: Props) {
@@ -27,31 +19,28 @@ export function PollCard({ data, ...rest }: Props) {
     <TouchableOpacity {...rest}>
       <HStack
         w="$full"
-        h={'$20'}
+        h={"$20"}
         bgColor="$gray800"
-        borderBottomWidth={'$4'}
+        borderBottomWidth={"$4"}
         borderBottomColor="$yellow500"
         justifyContent="space-between"
         alignItems="center"
         rounded="$sm"
-        mb={'$3'}
-        p={'$4'}
+        mb={"$3"}
+        p={"$4"}
       >
         <VStack>
           <Heading color="$white" fontSize="$md" fontFamily="$heading">
-            {data.title}
+            {data.poll.title}
           </Heading>
 
           <Text color="$gray200" fontSize="$xs">
-            Criado por {data.owner.name}
+            Criado por {data.poll.ownerName}
           </Text>
         </VStack>
 
-        <Participants
-          count={data._count.participants}
-          participants={data.participants}
-        />
+        <Participants count={data.countParticipants} participants={data.participants} />
       </HStack>
     </TouchableOpacity>
-  );
+  )
 }
