@@ -5,10 +5,10 @@ Evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologia
 </p>
 
 <p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#🚀-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#💻-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#🔖-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#📝-licença">Licença</a>
 </p>
 
 <p align="center">
@@ -21,15 +21,39 @@ Evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologia
   <img alt="nlw copa" src=".github/nlw-copa.png" width="100%">
 </p>
 
+<p align="center">
+  <img alt="Mobile 1" src=".github/print-mobile1.png" width="200px">
+  <img alt="Mobile 2" src=".github/print-mobile2.png" width="200px">
+  <img alt="Mobile 3" src=".github/print-mobile3.png" width="200px">
+  <img alt="Mobile 4" src=".github/print-mobile4.png" width="200px">
+  <img alt="Mobile 5" src=".github/print-mobile5.png" width="200px">
+</p>
+
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- Angular - Front
-- Tailwind - CSS
-- Fastify - Back
-- Prisma
-- SQLite - Banco de dados
+- Front
+  - NextJS
+  - Tailwind
+  - Typescript
+- Back
+  - Java 17
+  - Spring Boot Framework
+  - Spring Security
+  - Spring Validation
+  - MySQL
+  - Model Mapper
+  - Flyway
+  - JsonWebToken
+- Mobile
+  - React Native
+  - Typescript
+  - Phosphor React
+  - Gluestack UI
+  - country-list
+  - react-native-country-flag
+  - dayjs
 
 ## 💻 Projeto
 
@@ -41,7 +65,7 @@ Projeto paralizado, preciso aprender ionic para a parte mobile.
 
 Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/file/pgWxlBr4x2U9mlnyCGWapK/Bolão-da-Copa-(Community)?node-id=0%3A1). É necessário ter conta no [Figma](https://figma.com) para acessá-lo.
 
-## :memo: Licença
+## 📝 Licença
 
 Esse projeto está sob a licença MIT.
 
