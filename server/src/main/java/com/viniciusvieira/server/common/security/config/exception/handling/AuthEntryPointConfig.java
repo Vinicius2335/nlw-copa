@@ -42,8 +42,6 @@ public class AuthEntryPointConfig implements AuthenticationEntryPoint {
             body.put("message", "Credenciais incorretas.");
         }
 
-        body.put("path", request.getServletPath());
-
         final ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), body);
     }

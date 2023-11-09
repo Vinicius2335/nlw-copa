@@ -49,15 +49,6 @@ public class WebSecurityConfig {
                         })
                 );
 
-        //http
-        //        .authorizeHttpRequests(
-        //                authorize -> authorize
-        //                        .requestMatchers("/api/auth/**")
-        //                            .permitAll()
-        //                        .anyRequest()
-        //                            .authenticated()
-        //        );
-
         http.sessionManagement(
                 session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

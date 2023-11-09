@@ -33,7 +33,6 @@ public class AccessDeniedHandlerConfig implements AccessDeniedHandler {
         body.put("status", HttpServletResponse.SC_FORBIDDEN);
         body.put("error", "Forbidden");
         body.put("message", "O usuário não tem permissão de acesso. ");
-        body.put("path", request.getServletPath());
 
         final ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), body);
