@@ -12,8 +12,10 @@
 - `npm install @react-navigation/native` - navegação
   - `npx expo install react-native-screens react-native-safe-area-context` - complementos necessário para o navigate 
   - `npm install @react-navigation/bottom-tabs` - para a navegaçao por tab
+  - `npm i country-list` - biblioteca para pegar o nome do pais pelo código
+  - `npm i react-native-country-flag` - biblioteca com a bandeira dos países
 
-# 📝 Lembretes
+# 📝 Lembretes 
 
 - Como mudar o projeto para typescript
   1.  mudar App.js -> App.tsx

@@ -8,11 +8,10 @@ import { useAuth } from "../hooks/useAuthContext"
 
 const CustomInput = styled(InputForm, {})
 
-// TEST - LIMPAR EMAIL E SENHA
 export function Login() {
   const { signIn, isUserLoading } = useAuth()
-  const [email, setEmail] = useState("vinicius2335@gmail.com")
-  const [senha, setSenha] = useState("devdojo")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
 
   function handleTeste() {
     signIn(email, senha)

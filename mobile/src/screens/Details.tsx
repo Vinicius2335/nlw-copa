@@ -9,6 +9,8 @@ import { ToastBody } from "../components/generic/ToastBody"
 import { Header } from "../components/layout/Header"
 import { api } from "../services/api"
 import { EmptyMyPollList } from "../components/EmptyMyPollList"
+import { Share } from "react-native"
+import { Guesses } from "../components/Guesses"
 
 interface RouteParams {
   id: string
@@ -18,7 +20,7 @@ type OptionsType = "Seus Palpites" | "Ranking do Grupo"
 
 export function Details() {
   const route = useRoute()
-  const { id } = route.params as RouteParams
+  const { id: idPoll } = route.params as RouteParams
   const toast = useToast()
   const [optionSelected, setOptionSelected] = useState<OptionsType>("Seus Palpites")
   const [isLoading, setIsLoading] = useState(true)
@@ -27,9 +29,8 @@ export function Details() {
   async function handlePollDetails() {
     try {
       setIsLoading(true)
-      const response = await api.get<PollCardProps>(`/polls/${id}`).then(resp => resp.data)
+      const response = await api.get<PollCardProps>(`/polls/${idPoll}`).then(resp => resp.data)
 
-      console.log(response)
       setPollDetails(response)
     } catch (error) {
       console.error(error)
@@ -58,9 +59,15 @@ export function Details() {
     }
   }
 
+  async function handleCodeShare(){
+    await Share.share({
+      message: pollDetails.poll.code
+    })
+  }
+
   useEffect(() => {
     handlePollDetails()
-  }, [id])
+  }, [idPoll])
 
   if (isLoading) {
     return <Loading />
@@ -68,7 +75,7 @@ export function Details() {
 
   return (
     <VStack flex={1} bgColor="$gray900">
-      <Header title={pollDetails.poll.title} onShare={() => {}} showBackButton showShareButton />
+      <Header title={pollDetails.poll.title} onShare={handleCodeShare} showBackButton showShareButton />
 
       {pollDetails.countParticipants > 1 ? (
         <VStack px={"$5"} flex={1} bgColor="$gray900">
@@ -86,6 +93,8 @@ export function Details() {
               onPress={() => setOptionSelected("Ranking do Grupo")}
             />
           </HStack>
+
+          <Guesses pollId={idPoll} code={pollDetails.poll.code} />
         </VStack>
       ) : (
         <EmptyMyPollList code={pollDetails.poll.code} />

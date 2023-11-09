@@ -41,6 +41,6 @@ VALUES
 INSERT
 INTO
   guess
-  (id, first_team_points, second_team_points, game_id, participant)
+  (id, first_team_points, second_team_points, game_id, participant, created_at)
 VALUES
-  ('cb05061f-e4ac-4233-b5e0-239c08699f73', 2, 1, 'f5edcfdf-e221-4b25-ba92-c15bbaa17df3', 'c9fa488e-c370-4d34-8738-dec284797450');
+  ('cb05061f-e4ac-4233-b5e0-239c08699f73', 2, 1, 'f5edcfdf-e221-4b25-ba92-c15bbaa17df3', 'c9fa488e-c370-4d34-8738-dec284797450', NOW());

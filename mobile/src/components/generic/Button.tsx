@@ -25,7 +25,7 @@ export function Button({ title, icon, type = "PRIMARY", isLoading = false, onPre
     >
       {isLoading ? (
         <>
-          <ButtonSpinner mr={'$4'} />
+          <ButtonSpinner mr={"$4"} color={type === "SECONDARY" ? "$white" : "$black"} />
           <ButtonText
             color={type === "SECONDARY" ? "$white" : "$black"}
             fontSize={"$sm"}

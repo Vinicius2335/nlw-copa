@@ -1,12 +1,14 @@
+// @ts-nocheck
+
 import { useEffect, useState } from "react"
 import { FlatList, Toast, useToast } from "@gluestack-ui/themed"
 
-// import { api } from '../services/api';
-
 import { EmptyMyPollList } from "./EmptyMyPollList"
 import { Loading } from "./generic/Loading"
-import { Game, GameProps } from "./Game"
+import { Game } from "./Game"
 import { ToastBody } from "./generic/ToastBody"
+import { api } from "../services/api"
+import { ResponseGetAllGames } from "../@types/entities"
 
 interface Props {
   pollId: string
@@ -15,7 +17,7 @@ interface Props {
 
 export function Guesses({ pollId, code }: Props) {
   const [isLoading, setIsLoading] = useState(true)
-  const [games, setGames] = useState<GameProps[]>([])
+  const [games, setGames] = useState<ResponseGetAllGames[]>([])
   const [firstTeamPoints, setFirstTeamPoints] = useState("")
   const [secondTeamPoints, setSecondTeamPoints] = useState("")
 
@@ -25,14 +27,22 @@ export function Guesses({ pollId, code }: Props) {
     try {
       setIsLoading(true)
 
-      // const response = await api.get(`/polls/${pollId}/games`);
-      // setGames(response.data.games);
+      const response = await api
+        .get<ResponseGetAllGames[]>(`/polls/${pollId}/games`)
+        .then(resp => resp.data)
+      setGames(response)
     } catch (error) {
       toast.show({
         placement: "top",
         render: ({ id }) => {
           return (
-            <Toast mt={'$10'} nativeID={"toast-" + id} action="error" variant="solid">
+            <Toast
+              mt={"$10"}
+              nativeID={"toast-" + id}
+              action="error"
+              bgColor="$red500"
+              variant="solid"
+            >
               <ToastBody title="Erro!" description="Não foi possível listar os jogos" />
             </Toast>
           )
@@ -50,7 +60,13 @@ export function Guesses({ pollId, code }: Props) {
           placement: "top",
           render: ({ id }) => {
             return (
-              <Toast mt={'$10'} nativeID={"toast-" + id} action="attention" variant="solid">
+              <Toast
+                mt={"$10"}
+                nativeID={"toast-" + id}
+                action="attention"
+                variant="solid"
+                bgColor="$red500"
+              >
                 <ToastBody title="Erro!" description="Informe o placar para palpitar" />
               </Toast>
             )
@@ -58,16 +74,22 @@ export function Guesses({ pollId, code }: Props) {
         })
       }
 
-      // await api.post(`/polls/${pollId}/games/${gameId}/guesses`, {
-      //   firstTeamPoints: Number(firstTeamPoints),
-      //   secondTeamPoints: Number(secondTeamPoints),
-      // });
+      await api.post(`/polls/${pollId}/games/${gameId}/guesses`, {
+        firstTeamPoints: Number(firstTeamPoints),
+        secondTeamPoints: Number(secondTeamPoints)
+      })
 
       toast.show({
         placement: "top",
         render: ({ id }) => {
           return (
-            <Toast mt={'$10'} nativeID={"toast-" + id} action="success" variant="solid">
+            <Toast
+              mt={"$10"}
+              nativeID={"toast-" + id}
+              action="success"
+              variant="solid"
+              bgColor="$green500"
+            >
               <ToastBody title="Sucesso!" description="Palpite realizado com sucesso!" />
             </Toast>
           )
@@ -82,7 +104,13 @@ export function Guesses({ pollId, code }: Props) {
         placement: "top",
         render: ({ id }) => {
           return (
-            <Toast mt={'$10'} nativeID={"toast-" + id} action="error" variant="solid">
+            <Toast
+              mt={"$10"}
+              nativeID={"toast-" + id}
+              bgColor="$red500"
+              action="error"
+              variant="solid"
+            >
               <ToastBody title="Erro!" description="Não foi possível enviar o palpite" />
             </Toast>
           )
@@ -102,13 +130,13 @@ export function Guesses({ pollId, code }: Props) {
   return (
     <FlatList
       data={games}
-      keyExtractor={(item: GameProps) => item.id}
-      renderItem={({ item }: any) => (
+      keyExtractor={(item: ResponseGetAllGames) => item.game.id}
+      renderItem={({ item }: { item: ResponseGetAllGames }) => (
         <Game
-          data={item as GameProps}
+          data={item as ResponseGetAllGames}
           setFirstTeamPoints={setFirstTeamPoints}
           setSecondTeamPoints={setSecondTeamPoints}
-          onGuessConfirm={() => handleGuessConfirm(item.id)}
+          onGuessConfirm={() => handleGuessConfirm(item.game.id)}
         />
       )}
       contentContainerStyle={{ paddingBottom: 10 }}

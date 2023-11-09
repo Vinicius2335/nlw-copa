@@ -71,7 +71,7 @@ public class PollService {
      * @param request corpo da requisição com o código do bolão.
      */
     @Transactional
-    public void joinInPoll(EnterPollRequest request) {
+    public void joinInPoll(EnterPollRequest request) throws PollNotFoundException, UserAlreadyParticipantException {
         // verifica se o código está relacionado com algum bolão
         Poll poll = findByCodeOrThrows(request.getCode());
 

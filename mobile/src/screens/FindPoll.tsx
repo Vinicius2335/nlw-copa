@@ -6,6 +6,8 @@ import { useState } from "react"
 import { api } from "../services/api"
 import { ToastBody } from "../components/generic/ToastBody"
 import { useNavigation } from "@react-navigation/native"
+import { AxiosError } from "axios"
+import { ExceptionResponse } from "../@types/entities"
 
 const CustomInput = styled(Input, {})
 
@@ -42,7 +44,7 @@ export function FindPoll() {
       }
 
      await api.post("/polls/join", { code })
-
+     
      toast.show({
       placement: "top",
       render: ({ id }) => {
@@ -65,31 +67,55 @@ export function FindPoll() {
 
      navigate('polls')
 
-    } catch (error) {
-      console.error(error)
+    } catch (ex) {
+      const error = ex as AxiosError<ExceptionResponse>;
+      console.log(error.response.data)
       setIsLoading(false)
 
-      // TODO - trocar a mensagem do toast de acordo com a mensagem do back
+      if (error.response.data.title === 'Poll not found...'){
+        toast.show({
+          placement: "top",
+          render: ({ id }) => {
+            return (
+              <Toast
+                mt={"$10"}
+                nativeID={"toast-" + id}
+                action="error"
+                variant="solid"
+                bgColor="$red500"
+              >
+                <ToastBody
+                  title="Encontrar Bolão!"
+                  description="Não foi possivel encontrar o bolão."
+                />
+              </Toast>
+            )
+          }
+        })
+      }
 
-      toast.show({
-        placement: "top",
-        render: ({ id }) => {
-          return (
-            <Toast
-              mt={"$10"}
-              nativeID={"toast-" + id}
-              action="error"
-              variant="solid"
-              bgColor="$red500"
-            >
-              <ToastBody
-                title="Encontrar Bolão!"
-                description="Não foi possivel encontrar o bolão."
-              />
-            </Toast>
-          )
-        }
-      })
+      if (error.response.data.title === 'You already joined this poll'){
+        toast.show({
+          placement: "top",
+          render: ({ id }) => {
+            return (
+              <Toast
+                mt={"$10"}
+                nativeID={"toast-" + id}
+                action="error"
+                variant="solid"
+                bgColor="$red500"
+              >
+                <ToastBody
+                  title="Entrar no Bolão!"
+                  description="Você já está nesse bolão"
+                />
+              </Toast>
+            )
+          }
+        })
+      }
+      
     }
   }
 
@@ -103,7 +129,6 @@ export function FindPoll() {
           seu código único
         </Heading>
 
-        {/* TEST - VERIFICAR SE O CAPITALIZE ESTÁ FUNCIONANDO */}
         <CustomInput
           mt={"$2"}
           mb={"$4"}
