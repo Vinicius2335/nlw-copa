@@ -34,14 +34,14 @@ export function PollForm() {
   return (
     <form onSubmit={createPoll} className="mt-10 flex gap-2">
       <input
-        className="flex-1 px-6 py-4 rounded bg-nlwGray-800 border border-nlwGray-600 text-sm text-nlwGray-100"
+        className="custom-input"
         type="text"
         required
         placeholder="Qual nome do seu bolão?"
         ref={pollTitleInputRef}
       />
       <button
-        className="bg-nlwYellow-500 hover:bg-nlwYellow-700 px-6 py-4 rounded text-nlwGray-900 font-bold font-sm uppercase"
+        className="custom-button"
         type="submit"
       >
         Criar meu bolão

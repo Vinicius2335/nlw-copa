@@ -51,15 +51,15 @@ CREATE TABLE IF NOT EXISTS game (
 -- Palpites
 CREATE TABLE IF NOT EXISTS guess (
   id VARCHAR(36) NOT NULL,
-   created_at TIMESTAMP,
+   created_at timestamp NULL,
    first_team_points INT NOT NULL,
    second_team_points INT NOT NULL,
    game_id VARCHAR(36) NOT NULL,
-   participant VARCHAR(36) NOT NULL,
+   participant_id VARCHAR(36) NOT NULL,
    CONSTRAINT pk_guess PRIMARY KEY (id)
 );
 
 ALTER TABLE guess ADD CONSTRAINT FK_GUESS_ON_GAME FOREIGN KEY (game_id) REFERENCES game (id);
 
-ALTER TABLE guess ADD CONSTRAINT FK_GUESS_ON_PARTICIPANT FOREIGN KEY (participant) REFERENCES participant (id);
+ALTER TABLE guess ADD CONSTRAINT FK_GUESS_ON_PARTICIPANT FOREIGN KEY (participant_id) REFERENCES participant (id);
 

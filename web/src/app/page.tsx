@@ -4,7 +4,7 @@ import appPreviewImg from "../assets/app-nlw-copa-preview.png"
 import iconCheckImg from "../assets/icon-check.svg"
 import logoImg from "../assets/logo.svg"
 import usersAvatarExampleImg from "../assets/users-avatar-example.png"
-import { PollForm } from "@/components/PollForm"
+import { ButtonRedirect } from "@/components/generic/ButtomRedirect"
 
 export default async function Home() {
   const pollCountResponse = await api.get("/polls/count")
@@ -33,12 +33,9 @@ export default async function Home() {
           </strong>
         </div>
 
-        <PollForm />
-
-        <p className="mt-4 text-sm text-gray-300 leading-relaxed">
-          Após criar seu bolão, você receberá um código único que poderá usar para convidar outras
-          pessoas 🚀.
-        </p>
+        <div className="mt-4 w-full">
+          <ButtonRedirect title="Logar" redirectTo="/login" />
+        </div>
 
         <div className="mt-10 pt-10 mb-10 border-t border-gray-600 flex justify-between items-center text-gray-100">
           <div className="flex items-center gap-6">

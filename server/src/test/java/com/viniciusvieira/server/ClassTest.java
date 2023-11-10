@@ -58,7 +58,10 @@ class ClassTest {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String password = encoder.encode("john123");
 
+        String password2 = encoder.encode("devdojo");
+
         System.out.println(password);
+        System.out.println(password2);
 
         assertEquals(password.getClass(), String.class);
     }

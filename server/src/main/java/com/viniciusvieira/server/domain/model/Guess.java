@@ -30,6 +30,6 @@ public class Guess extends BasicEntity {
     // BUG : mudar para participant_id + a migration
     // Muitos palpites - estão relacionados a - 1 participante
     @ManyToOne(optional=false)
-    @JoinColumn(name="participant", nullable=false)
+    @JoinColumn(name="participant_id", nullable=false)
     private Participant participant;
 }
