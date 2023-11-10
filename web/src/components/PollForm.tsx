@@ -32,7 +32,7 @@ export function PollForm() {
   }
 
   return (
-    <form onSubmit={createPoll} className="mt-10 flex gap-2">
+    <form onSubmit={createPoll} className="mt-10 flex flex-col gap-4 w-[500px]">
       <input
         className="custom-input"
         type="text"

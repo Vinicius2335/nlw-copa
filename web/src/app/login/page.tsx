@@ -1,12 +1,12 @@
 "use client"
 
-import Image from "next/image"
-import logoImg from "../../assets/logo.svg"
-import { FormEvent, useRef, useState } from "react"
-import { Rocket } from "lucide-react"
+import { Header } from "@/components/generic/Header"
 import { Loading } from "@/components/generic/Loading"
 import { api } from "@/libs/axios"
+import { LoginResponseProps } from "@/model/responses"
+import { Rocket } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { FormEvent, useRef, useState } from "react"
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
@@ -22,7 +22,11 @@ export default function Login() {
 
     try {
       setIsLoading(true)
-      await api.post("/auth/login", { email, password })
+      const response = await api.post<LoginResponseProps>("/auth/login", { email, password })
+      .then(resp => resp.data)
+
+      api.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+
       route.push("/new-poll")
     } catch (error) {
       console.error(error)
@@ -34,9 +38,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center">
       <main className="flex flex-col justify-center items-center mt-14">
-        <Image src={logoImg} alt="Nlw Logo" />
-
-        <h1 className="mt-14 text-white text-5xl font-bold leading-tight">Login</h1>
+        <Header title="Login" />
 
         <form onSubmit={handleOnSubmit} className="mt-10 flex flex-col w-[500px] gap-4">
           <input
