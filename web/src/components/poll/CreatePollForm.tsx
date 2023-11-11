@@ -3,7 +3,7 @@
 import { api } from "@/libs/axios"
 import { FormEvent, useRef } from "react"
 
-export function PollForm() {
+export function CreatePollForm() {
   const pollTitleInputRef = useRef<HTMLInputElement>(null)
 
   async function createPoll(event: FormEvent) {
@@ -20,11 +20,9 @@ export function PollForm() {
       await navigator.clipboard.writeText(code)
       alert(`Bolão criado com sucesso, o código foi copiado para a área de transferência!`)
 
-      if (pollTitleInputRef.current?.value != null){
+      if (pollTitleInputRef.current?.value != null) {
         pollTitleInputRef.current.value = ""
       }
-
-
     } catch (err) {
       console.error(err)
       alert("Falha ao criar o bolão, tente novamente!")
@@ -40,10 +38,7 @@ export function PollForm() {
         placeholder="Qual nome do seu bolão?"
         ref={pollTitleInputRef}
       />
-      <button
-        className="custom-button"
-        type="submit"
-      >
+      <button className="custom-button" type="submit">
         Criar meu bolão
       </button>
     </form>

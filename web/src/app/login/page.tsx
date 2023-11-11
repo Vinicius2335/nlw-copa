@@ -3,7 +3,7 @@
 import { Header } from "@/components/generic/Header"
 import { Loading } from "@/components/generic/Loading"
 import { api } from "@/libs/axios"
-import { LoginResponseProps } from "@/model/responses"
+import { LoginResponse } from "@/model/responses"
 import { Rocket } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { FormEvent, useRef, useState } from "react"
@@ -22,10 +22,11 @@ export default function Login() {
 
     try {
       setIsLoading(true)
-      const response = await api.post<LoginResponseProps>("/auth/login", { email, password })
-      .then(resp => resp.data)
+      const response = await api
+        .post<LoginResponse>("/auth/login", { email, password })
+        .then(resp => resp.data)
 
-      api.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+      api.defaults.headers.common["Authorization"] = `Bearer ${response.token}`
 
       route.push("/new-poll")
     } catch (error) {
@@ -68,7 +69,6 @@ export default function Login() {
             )}
           </button>
         </form>
-
       </main>
     </div>
   )
