@@ -10,6 +10,7 @@ import {
   AvatarOverflowIndicator
 } from "../ui/avatar"
 import { Card } from "../ui/card"
+import { useRouter } from "next/navigation"
 
 export interface PollCardProps {
   poll: Poll
@@ -22,8 +23,11 @@ interface Props {
 }
 
 export function PollCard({ data }: Props) {
+  const router = useRouter()
+
+  // TODO - função ao tocar no card
   function handleOnClick() {
-    alert("Card Tocado")
+    router.push(`/polls/${data.poll.id}`)
   }
 
   return (

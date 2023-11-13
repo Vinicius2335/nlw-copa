@@ -1,10 +1,12 @@
 "use client"
 
 import { api } from "@/libs/axios"
-import { FormEvent, useRef } from "react"
+import { FormEvent, useRef, useState } from "react"
+import { Loading } from "../generic/Loading"
 
 export function CreatePollForm() {
   const pollTitleInputRef = useRef<HTMLInputElement>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   async function createPoll(event: FormEvent) {
     event.preventDefault()
@@ -12,6 +14,7 @@ export function CreatePollForm() {
     const pollTitle = pollTitleInputRef.current?.value
 
     try {
+      setIsLoading(true)
       const response = await api.post("/polls", {
         title: pollTitle
       })
@@ -26,6 +29,8 @@ export function CreatePollForm() {
     } catch (err) {
       console.error(err)
       alert("Falha ao criar o bolão, tente novamente!")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -39,7 +44,13 @@ export function CreatePollForm() {
         ref={pollTitleInputRef}
       />
       <button className="custom-button" type="submit">
-        Criar meu bolão
+        {
+          isLoading ? (
+            <Loading />
+          ) : (
+            <>Criar meu bolão</>
+          )
+        }
       </button>
     </form>
   )

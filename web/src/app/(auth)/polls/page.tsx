@@ -6,11 +6,11 @@ import { data } from "@/utils/Test"
 
 export default function Polls() {
   // TEST - remover data dps
+  // TODO - LoadingPolls
   const polls: PollCardProps[] = data
 
   return (
-    <div className="flex items-center justify-center">
-      <main className="flex flex-col justify-center items-center mt-14 w-[500px]">
+    <>
         <Header title="Meus Bolões" />
 
         <ButtonToFindPoll />
@@ -26,7 +26,6 @@ export default function Polls() {
               )
             }
         </div>
-      </main>
-    </div>
+    </>
   )
 }

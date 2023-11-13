@@ -2,13 +2,17 @@
 
 import { useRouter } from "next/navigation"
 import { ButtonHTMLAttributes } from "react"
+import { Button } from "../ui/button"
+
+type buttonType =  "nlw" | "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | null | undefined
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string
   redirectTo: string
+  variant?: buttonType
 }
 
-export function ButtonRedirect({ title, redirectTo, ...props }: ButtonProps) {
+export function ButtonRedirect({ title, variant="nlw", redirectTo, ...props }: ButtonProps) {
   const router = useRouter()
 
   function handleOnClick() {
@@ -16,8 +20,8 @@ export function ButtonRedirect({ title, redirectTo, ...props }: ButtonProps) {
   }
 
   return (
-    <button className="custom-button" onClick={handleOnClick} {...props}>
+    <Button variant={variant} onClick={handleOnClick} {...props}>
       {title}
-    </button>
+    </Button>
   )
 }
