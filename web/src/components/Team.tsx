@@ -25,7 +25,7 @@ export function Team({ code, position, value, onChange }: TeamProps) {
 
       <input
         type="number"
-        className="bg-nlwGray-900 w-10 h-9 border border-nlwGray-600 text-white text-xs font-bold placeholder:text-nlwGray-300 rounded pl-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-nlwGray-900 focus:ring-nlwYellow-500"
+        className="bg-nlwGray-900 w-10 h-9 border border-nlwGray-600 text-white text-xs font-bold placeholder:text-nlwGray-300 rounded pl-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-nlwGray-900 focus:ring-nlwYellow-500 disabled:text-nlwGray-300"
         disabled={disabled}
         placeholder="0"
         value={value}

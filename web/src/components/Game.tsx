@@ -36,14 +36,15 @@ export function Game({ data, onGuessConfirm, setFirstTeamPoints, setSecondTeamPo
       )}
 
       {!data.guess && (
-        <Button className="w-full bg-nlwGreen-500 mt-4" size={'sm'} onClick={onGuessConfirm}>
-          <div className="flex items-center">
-            <p className="text-white text-xs font-bold mr-3">
-              CONFIRMAR PALPITE
-            </p>
+        <Button
+          variant={'success'}
+          className="flex items-center w-full mt-4 "
+          size={"sm"}
+          onClick={onGuessConfirm}
+        >
+          <span className="text-white text-xs font-bold mr-3">CONFIRMAR PALPITE</span>
 
-            <Check className="text-white" size={16}/>
-          </div>
+          <Check className="text-white" size={16} />
         </Button>
       )}
     </div>

@@ -1,11 +1,12 @@
 "use client"
 
-import { GetAllGamesResponse } from "@/model/responses"
+import { api } from "@/libs/axios"
+import { ExceptionResponse, GetAllGamesResponse } from "@/model/responses"
 import { useEffect, useState } from "react"
-import { useToast } from "./ui/use-toast"
-import { Loading } from "./generic/Loading"
 import { Game } from "./Game"
-import { gamesData } from "@/utils/Test"
+import { Loading } from "./generic/Loading"
+import { useToast } from "./ui/use-toast"
+import { AxiosError } from "axios"
 
 interface GuessesProps {
   pollId: string
@@ -13,22 +14,81 @@ interface GuessesProps {
 }
 
 export function Guesses({ pollId, code }: GuessesProps) {
-  const [isLoading, setIsLoading] = useState(false) // TODO - INICIAR COM TRUE
-  const [games, setGames] = useState<GetAllGamesResponse[]>(gamesData)
+  const [isLoading, setIsLoading] = useState(true)
+  const [games, setGames] = useState<GetAllGamesResponse[]>([])
   const [firstTeamPoints, setFirstTeamPoints] = useState("")
   const [secondTeamPoints, setSecondTeamPoints] = useState("")
-  const toast = useToast()
+  const { toast } = useToast()
 
-  async function handleGetAllGames() {
-    // TODO
+  async function getAllGames() {
+    try {
+      setIsLoading(true)
+
+      const response = await api
+        .get<GetAllGamesResponse[]>(`/polls/${pollId}/games`)
+        .then(resp => resp.data)
+      setGames(response)
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "❌ Erro",
+        description: "Não foi possível listar os jogos.",
+        duration: 2000
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  async function handleGuessConfirm(pollId: string) {
-    // TODO
+  async function handleGuessConfirm(gameId: string) {
+    try {
+      if (!firstTeamPoints.trim() || !secondTeamPoints.trim()) {
+        toast({
+          variant: "destructive",
+          title: "❌ Erro",
+          description: "Informe o placar para palpitar.",
+          duration: 2000
+        })
+        return
+      }
+
+      await api.post(`/polls/${pollId}/games/${gameId}/guesses`, {
+        firstTeamPoints: Number(firstTeamPoints),
+        secondTeamPoints: Number(secondTeamPoints)
+      })
+
+      toast({
+        variant: "success",
+        title: "✔ Sucesso",
+        description: "Palpite realizado com sucesso.",
+        duration: 2000
+      })
+
+      getAllGames()
+    } catch (ex) {
+      const error = ex as AxiosError<ExceptionResponse>
+      console.log(error.response?.data)
+
+      if (error.response?.data.title === "You cannot send guesses after the game date...") {
+        toast({
+          variant: "destructive",
+          title: "❌ Enviar Palpite",
+          description: "Você não pode enviar palpites após a data do jogo....",
+          duration: 2000
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "❌ Enviar Palpite",
+          description: "Não foi possível enviar o palpite.",
+          duration: 2000
+        })
+      }
+    }
   }
 
   useEffect(() => {
-    handleGetAllGames()
+    getAllGames()
   }, [])
 
   if (isLoading) {
@@ -37,11 +97,11 @@ export function Guesses({ pollId, code }: GuessesProps) {
 
   return (
     <>
-      {games.map((game, idx) => (
+      {games.map((item, idx) => (
         <Game
           key={idx}
-          data={game}
-          onGuessConfirm={() => handleGuessConfirm(pollId)}
+          data={item}
+          onGuessConfirm={() => handleGuessConfirm(item.game.id)}
           setFirstTeamPoints={setFirstTeamPoints}
           setSecondTeamPoints={setSecondTeamPoints}
         />

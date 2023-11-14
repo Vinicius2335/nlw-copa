@@ -19,7 +19,7 @@ export function Participants({ participants }: ParticipantsProps) {
         {participants.map((participant, i) => (
           <Avatar key={i}>
             <AvatarImage src={`${participant.user.avatarUrl}`} alt="Foto de perfil do usuário" />
-            <AvatarFallback>NW</AvatarFallback>
+            <AvatarFallback>{participant.user.name.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
         ))}
       </AvatarGroupList>

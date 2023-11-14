@@ -14,6 +14,7 @@ export function EmptyMyPollParticipantList({ code }: Props) {
     await navigator.clipboard.writeText(code)
 
     toast({
+      title: "❕ Info",
       description: "Código copiado para a área de transferência!",
       duration: 2000
     })

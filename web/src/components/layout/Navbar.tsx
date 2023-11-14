@@ -3,13 +3,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Image from "next/image"
 import LogoImg from "@/assets/logo.svg"
 import { ActiveLink } from "../generic/ActiveLink"
+import { UserProps } from '../../contexts/AuthContext';
 
 const menus = [
   { title: "Novo Bolão", path: "/new-poll" },
   { title: "Meus Bolões", path: "/polls" },
 ]
 
-export function Navbar() {
+interface NavbarProps {
+  user: UserProps
+}
+
+export function Navbar({ user }: NavbarProps) {
   return (
     <nav className="bg-nlwGray-800 w-full border-b md:border-0">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
@@ -29,8 +34,8 @@ export function Navbar() {
         </div>
         <div>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={user.avatarUrl} alt="User Avatar" />
+            <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
         </div>
       </div>

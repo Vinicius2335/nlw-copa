@@ -1,20 +1,19 @@
 "use client"
 
+import logoImg from "@/assets/logo.svg"
 import { Header } from "@/components/generic/Header"
 import { Loading } from "@/components/generic/Loading"
-import { api } from "@/libs/axios"
-import { LoginResponse } from "@/model/responses"
+import { useToast } from "@/components/ui/use-toast"
+import { useAuth } from "@/hooks/useAuthContext"
 import { Rocket } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { FormEvent, useRef, useState } from "react"
 import Image from "next/image"
-import logoImg from "@/assets/logo.svg"
+import { FormEvent, useRef } from "react"
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState(false)
   const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
-  const route = useRouter()
+  const { toast } =  useToast()
+  const { signIn, isUserLoading } = useAuth()
 
   async function handleOnSubmit(e: FormEvent) {
     e.preventDefault()
@@ -22,20 +21,17 @@ export default function Login() {
     const email = emailInputRef.current?.value
     const password = passwordInputRef.current?.value
 
-    try {
-      setIsLoading(true)
-      const response = await api
-        .post<LoginResponse>("/auth/login", { email, password })
-        .then(resp => resp.data)
-
-      api.defaults.headers.common["Authorization"] = `Bearer ${response.token}`
-
-      route.push("/new-poll")
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
+    if (!email?.trim() || !password?.trim()){
+      toast({
+        variant: 'destructive',
+        title: "❌ Login",
+        description: "Campos de Email/Senha são obrigatorios.",
+        duration: 2000
+      })
+      return;
     }
+
+    signIn(email, password)
   }
 
   return (
@@ -62,7 +58,7 @@ export default function Login() {
           />
 
           <button className="custom-button flex items-center justify-center" type="submit">
-            {isLoading ? (
+            {isUserLoading ? (
               <Loading />
             ) : (
               <>
