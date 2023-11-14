@@ -1,10 +1,12 @@
 "use client"
 
+import { Guesses } from "@/components/Guesses"
 import { Header } from "@/components/generic/Header"
 import { Loading } from "@/components/generic/Loading"
 import { Option } from "@/components/generic/Option"
 import { EmptyMyPollParticipantList } from "@/components/poll/EmptyMyPollParticipantList"
 import { PollCardProps } from "@/components/poll/PollCard"
+import { PollHeader } from "@/components/poll/PollHeader"
 import { api } from "@/libs/axios"
 import { useEffect, useState } from "react"
 
@@ -46,21 +48,28 @@ export default function PollDetails({ params }: PollDetailsProps) {
         <Loading tamanho="h-28 w-28" classname="text-nlwYellow-500" />
       ) : (
         <>
-          <Header title={pollDetails.poll.title} />
-          <EmptyMyPollParticipantList code={pollDetails.poll.code} />
+          <PollHeader data={pollDetails} />
 
-          <div className="mt-4 mb-5 p-1 bg-nlwGray-800 w-full rounded-sm flex items-center justify-around">
-            <Option
-              title="Seus Palpites"
-              isSelected={optionSelected === "Seus Palpites"}
-              onClick={() => setOptionSelected("Seus Palpites")}
-            />
-            <Option
-              title="Ranking do Grupo"
-              isSelected={optionSelected === "Ranking do Grupo"}
-              onClick={() => setOptionSelected("Ranking do Grupo")}
-            />
-          </div>
+          {pollDetails.countParticipants > 1 ? (
+            <>
+              <div className="mt-4 mb-5 p-1 bg-nlwGray-800 w-full rounded-sm flex items-center justify-around">
+              <Option
+                title="Seus Palpites"
+                isSelected={optionSelected === "Seus Palpites"}
+                onClick={() => setOptionSelected("Seus Palpites")}
+              />
+              <Option
+                title="Ranking do Grupo"
+                isSelected={optionSelected === "Ranking do Grupo"}
+                onClick={() => setOptionSelected("Ranking do Grupo")}
+              />
+            </div>
+
+            <Guesses code={pollDetails.poll.code} pollId={params.idPoll} />
+            </>
+          ) : (
+            <EmptyMyPollParticipantList code={pollDetails.poll.code} />
+          )}
         </>
       )}
     </>

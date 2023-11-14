@@ -1,3 +1,5 @@
+import { Game } from "./models"
+
 export interface UserProps {
   name: string
   avatarUrl: string

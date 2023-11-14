@@ -7,6 +7,8 @@ import { LoginResponse } from "@/model/responses"
 import { Rocket } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { FormEvent, useRef, useState } from "react"
+import Image from "next/image"
+import logoImg from "@/assets/logo.svg"
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
@@ -39,6 +41,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center">
       <main className="flex flex-col justify-center items-center mt-14">
+        <Image className="mb-4" src={logoImg} alt="Nlw Logo" />
         <Header title="Login" />
 
         <form onSubmit={handleOnSubmit} className="mt-10 flex flex-col w-[500px] gap-4">

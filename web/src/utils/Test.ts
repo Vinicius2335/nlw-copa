@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { PollCardProps } from '../components/poll/PollCard';
+import { GetAllGamesResponse } from '../model/responses';
 
 export const data: PollCardProps[] =
 [
@@ -40,5 +41,27 @@ export const data: PollCardProps[] =
 				}
 			}
 		]
+	}
+]
+
+export const gamesData: GetAllGamesResponse[] = 
+[
+	{
+		"game": {
+			"id": "03e6c4a7-c142-44a1-8cb1-da00681cf101",
+			"firstTeamCountryCode": "DE",
+			"secondTeamCountryCode": "BR",
+			"date": "2023-12-04T13:33:25-03:00"
+		},
+		"guess": null
+	},
+	{
+		"game": {
+			"id": "f5edcfdf-e221-4b25-ba92-c15bbaa17df3",
+			"firstTeamCountryCode": "BR",
+			"secondTeamCountryCode": "AR",
+			"date": "2023-12-04T13:33:25-03:00"
+		},
+		"guess": null
 	}
 ]

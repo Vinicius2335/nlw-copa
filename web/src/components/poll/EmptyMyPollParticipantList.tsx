@@ -15,18 +15,22 @@ export function EmptyMyPollParticipantList({ code }: Props) {
 
     toast({
       description: "Código copiado para a área de transferência!",
-      duration: 3000,
+      duration: 2000
     })
   }
 
   return (
     <p className="mt-4 text-nlwGray-200 text-center text-sm">
-      Neste bolão só você está participando, que tal
-      <Button className="text-nlwYellow-500" variant={"link"} onClick={() => handleOnShare(code)}>
+      Neste bolão só você está participando, que tal{" "}
+      <span
+        className="text-nlwYellow-500 cursor-pointer hover:underline hover:underline-offset-4"
+        onClick={() => handleOnShare(code)}
+      >
         compartilhar o código
-      </Button>
+      </span>{" "}
       do bolão com alguém?
       <span className="ml-2 font-bold text-nlwGray-200 text-sm">{code}</span>
     </p>
   )
 }
+

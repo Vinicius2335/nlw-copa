@@ -11,6 +11,7 @@ import {
 } from "../ui/avatar"
 import { Card } from "../ui/card"
 import { useRouter } from "next/navigation"
+import { Participants } from "../Participants"
 
 export interface PollCardProps {
   poll: Poll
@@ -40,20 +41,7 @@ export function PollCard({ data }: Props) {
         <p className="text-nlwGray-200 text-xs">Criado por {data.poll.ownerName}</p>
       </div>
 
-      <AvatarGroup limit={4}>
-        <AvatarGroupList>
-          {data.participants.map((participant, i) => (
-            <Avatar key={i}>
-              <AvatarImage
-                src={`${participant.user.avatarUrl}`}
-                alt="Foto de perfil do usuário"
-              />
-              <AvatarFallback>NW</AvatarFallback>
-            </Avatar>
-          ))}
-        </AvatarGroupList>
-        <AvatarOverflowIndicator />
-      </AvatarGroup>
+      <Participants participants={data.participants} />
     </Card>
   )
 }
