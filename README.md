@@ -8,6 +8,7 @@ Evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologia
   <a href="#🚀-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#💻-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#🔖-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#🖼-screenshot-web">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#📝-licença">Licença</a>
 </p>
 
@@ -18,7 +19,7 @@ Evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologia
 <br>
 
 <p align="center">
-  <img alt="nlw copa" src=".github/nlw-copa.png" width="100%">
+  <img alt="nlw copa" src=".github/Web1.jpeg" width="100%">
 </p>
 
 <p align="center">
@@ -37,6 +38,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - NextJS
   - Tailwind
   - Typescript
+  - Lucide-react
+  - Shadcn UI
 - Back
   - Java 17
   - Spring Boot Framework
@@ -64,6 +67,18 @@ Projeto paralizado, preciso aprender ionic para a parte mobile.
 ## 🔖 Layout
 
 Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/file/pgWxlBr4x2U9mlnyCGWapK/Bolão-da-Copa-(Community)?node-id=0%3A1). É necessário ter conta no [Figma](https://figma.com) para acessá-lo.
+
+## 🖼 ScreenShot Web
+
+<p align="center">
+  <img alt="Web 2" src=".github/Web2.jpeg" width="400px">
+  <img alt="Web 3" src=".github/Web3.jpeg" width="400px">
+  <img alt="Web 4" src=".github/Web4.jpeg" width="400px">
+  <img alt="Web 5" src=".github/Web5.jpeg" width="400px">
+  <img alt="Web 6" src=".github/Web6.jpeg" width="400px">
+  <img alt="Web 7" src=".github/Web7.jpeg" width="400px">
+  <img alt="Web 8" src=".github/Web8.jpeg" width="400px">
+</p>
 
 ## 📝 Licença
 
