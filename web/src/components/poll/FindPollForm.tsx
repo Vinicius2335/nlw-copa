@@ -19,18 +19,18 @@ export function FindPollForm() {
 
     const pollCode = pollCodeInputRef.current!.value
 
-    if (!pollCode.trim()) {
-      toast({
-        variant: "destructive",
-        title: "❌ Encontrar Bolão",
-        description: "Informe o código.",
-        duration: 2000
-      })
-      return
-    }
-
     try {
       setIsLoading(true)
+
+      if (!pollCode.trim()) {
+        toast({
+          variant: "destructive",
+          title: "❌ Encontrar Bolão",
+          description: "Informe o código.",
+          duration: 2000
+        })
+        return
+      }
 
       await api.post("/polls/join", {
         code: pollCode

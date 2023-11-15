@@ -33,8 +33,9 @@ export default async function Home() {
           </strong>
         </div>
 
-        <div className="mt-4 w-full">
+        <div className="mt-4 w-full flex flex-col gap-3">
           <ButtonRedirect title="Logar" redirectTo="/login" />
+          <ButtonRedirect title="Registrar-se" redirectTo="/register" />
         </div>
 
         <div className="mt-10 pt-10 mb-10 border-t border-gray-600 flex justify-between items-center text-gray-100">

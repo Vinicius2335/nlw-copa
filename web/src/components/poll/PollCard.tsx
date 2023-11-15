@@ -26,7 +26,6 @@ interface Props {
 export function PollCard({ data }: Props) {
   const router = useRouter()
 
-  // TODO - função ao tocar no card
   function handleOnClick() {
     router.push(`/polls/${data.poll.id}`)
   }

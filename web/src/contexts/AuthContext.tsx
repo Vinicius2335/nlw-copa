@@ -1,5 +1,6 @@
 "use client"
 
+import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/libs/axios";
 import { useRouter } from "next/navigation";
 import { ReactNode, createContext, useState } from "react";
@@ -35,6 +36,7 @@ export function AuthContextProvicer({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>({} as UserProps)
   const [token, setToken] = useState('')
   const route = useRouter()
+  const { toast } =  useToast()
 
   async function signIn(email: string, password: string){
     try {
@@ -54,7 +56,12 @@ export function AuthContextProvicer({ children }: AuthProviderProps) {
 
     } catch(error){
       console.error(error);
-      throw error;
+      toast({
+        variant: 'destructive',
+        title: "❌ Login",
+        description: "Credenciais Incorretas.",
+        duration: 2000
+      })
 
     } finally {
       setIsUserLoading(false)

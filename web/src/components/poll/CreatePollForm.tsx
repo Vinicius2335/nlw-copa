@@ -15,18 +15,20 @@ export function CreatePollForm() {
 
     const pollTitle = pollTitleInputRef.current!.value
 
-    if (!pollTitle.trim()) {
-      toast({
-        variant: 'destructive',
-        title: "❌ Novo Bolão",
-        description: "Informe um nome para o seu bolão.",
-        duration: 2000
-      })
-      return;
-    }
 
     try {
       setIsLoading(true)
+
+      if (!pollTitle.trim()) {
+        toast({
+          variant: 'destructive',
+          title: "❌ Novo Bolão",
+          description: "Informe um nome para o seu bolão.",
+          duration: 2000
+        })
+        return;
+      }
+      
       const response = await api.post("/polls", {
         title: pollTitle
       })

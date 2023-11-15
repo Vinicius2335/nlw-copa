@@ -131,7 +131,6 @@ public class PollService {
                             user(UserResponse.builder().avatarUrl(participant.getUser().getAvatarUrl()).build()).
                             build()
                     )
-                    .limit(4)
                     .toList();
 
             PollResponse pollResponse = pollMapper.toPollResponse(poll);

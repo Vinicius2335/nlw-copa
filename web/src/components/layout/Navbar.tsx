@@ -3,11 +3,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Image from "next/image"
 import LogoImg from "@/assets/logo.svg"
 import { ActiveLink } from "../generic/ActiveLink"
-import { UserProps } from '../../contexts/AuthContext';
+import { UserProps } from "../../contexts/AuthContext"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+import { ButtonLogout } from "./ButtonLogout"
 
 const menus = [
   { title: "Novo Bolão", path: "/new-poll" },
-  { title: "Meus Bolões", path: "/polls" },
+  { title: "Meus Bolões", path: "/polls" }
 ]
 
 interface NavbarProps {
@@ -20,7 +29,7 @@ export function Navbar({ user }: NavbarProps) {
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/">
-            <Image alt="logo" src={LogoImg} width={112} height={112}/>
+            <Image alt="logo" src={LogoImg} width={112} height={112} />
           </Link>
         </div>
         <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0`}>
@@ -33,10 +42,22 @@ export function Navbar({ user }: NavbarProps) {
           </ul>
         </div>
         <div>
-          <Avatar>
-            <AvatarImage src={user.avatarUrl} alt="User Avatar" />
-            <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
-          </Avatar>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarImage src={user.avatarUrl} alt="User Avatar" />
+                <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-nlwGray-800">
+              <DropdownMenuLabel>Profile</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>{user.name}</DropdownMenuItem>
+              <DropdownMenuItem>
+                <ButtonLogout />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </nav>
